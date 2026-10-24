@@ -39,9 +39,9 @@ test('avisos: pedido recebido antes de ativar aparece e notifica após permitir 
 });
 
 test('avisos: chama delivery com voz em portugues no volume maximo',()=>{
- const calls=[],storage=new Map();const window={SpeechSynthesisUtterance:class{constructor(text){this.text=text;}},speechSynthesis:{getVoices:()=>[{lang:'pt-BR',name:'Voz brasileira'}],speak:call=>calls.push(call)}};
+ const calls=[],storage=new Map();const window={SpeechSynthesisUtterance:class{constructor(text){this.text=text;}},speechSynthesis:{getVoices:()=>[{lang:'pt-BR',name:'Voz brasileira'},{lang:'pt-BR',name:'Voz brasileira Natural Online'}],speak:call=>calls.push(call)}};
  vm.runInNewContext(source,{window,document:{querySelector:()=>({addEventListener(){}})},localStorage:{getItem:key=>storage.get(key),setItem:(key,value)=>storage.set(key,value)}});
  window.MDLAlerts.armSound();
  const order={id:'voice',code:'VOICE',status:'novo'};window.MDLAlerts.ingest([order]);window.MDLAlerts.ingest([order]);
- assert.equal(calls.length,1);assert.match(calls[0].text,/Delivery!/);assert.equal(calls[0].lang,'pt-BR');assert.equal(calls[0].volume,1);assert.equal(calls[0].voice.name,'Voz brasileira');
+ assert.equal(calls.length,1);assert.match(calls[0].text,/Delivery!/);assert.equal(calls[0].lang,'pt-BR');assert.equal(calls[0].volume,1);assert.equal(calls[0].voice.name,'Voz brasileira Natural Online');assert.equal(calls[0].pitch,1);assert.equal(calls[0].rate,.95);assert.equal(calls[0].text,'Delivery! ... Delivery! ... Delivery!');
 });
