@@ -1,9 +1,7 @@
 import { readFile } from 'node:fs/promises';
-import { createApp } from '../server.mjs';
-import { createRemoteStore } from '../lib/remote-store.mjs';
 
 async function initialize(env) {
-  const { createClient } = await import('@libsql/client/web');
+  const [{createClient},{createApp},{createRemoteStore}]=await Promise.all([import('@libsql/client/web'),import('../server.mjs'),import('../lib/remote-store.mjs')]);
   const client=createClient({url:env.TURSO_DATABASE_URL,authToken:env.TURSO_AUTH_TOKEN});
   try {
     const seed=JSON.parse(await readFile(new URL('../config/loja.json',import.meta.url),'utf8'));

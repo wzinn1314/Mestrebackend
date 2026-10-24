@@ -5,6 +5,9 @@ import {createClient} from '@libsql/client';
 import {createRemoteStore} from '../lib/remote-store.mjs';
 import {createApp} from '../server.mjs';
 import {createVercelHandler} from '../api/index.mjs';
+import {execFile} from 'node:child_process';
+import {promisify} from 'node:util';
+import {fileURLToPath} from 'node:url';
 
 const invoke=async(handler,url,body)=>{
   let status,headers,payload;
@@ -43,4 +46,13 @@ test('Vercel: cliente não pode trocar o banco para um arquivo local',async()=>{
 test('Vercel: frontend encaminha somente /api para o backend configurado',async()=>{
   const config=JSON.parse(await readFile(new URL('../../frontend/vercel.json',import.meta.url),'utf8'));
   assert.deepEqual(config.rewrites,[{source:'/api/:path*',destination:'https://mestredoslanchesbackend.vercel.app/api/:path*'}]);
+});
+
+test('Vercel: entrada principal não abre servidor nem SQLite local na nuvem',async()=>{
+  const root=fileURLToPath(new URL('../',import.meta.url));
+  const env={...process.env,VERCEL:'1',TURSO_DATABASE_URL:'',TURSO_AUTH_TOKEN:'',PUBLIC_ORIGIN:'',MDL_ADMIN_PASSWORD:''};
+  await promisify(execFile)(process.execPath,['--no-experimental-sqlite','server.mjs'],{cwd:root,env,timeout:5000,windowsHide:true});
+  const script="const {default:handler}=await import('./server.mjs');let status;const res={writeHead(value){status=value;},end(data){console.log(status+':'+JSON.parse(data).code);}};await handler({url:'/',headers:{},socket:{}},res);";
+  const {stdout}=await promisify(execFile)(process.execPath,['--no-experimental-sqlite','--input-type=module','-e',script],{cwd:root,env,timeout:5000,windowsHide:true});
+  assert.match(stdout,/503:CONFIGURATION_REQUIRED/);
 });

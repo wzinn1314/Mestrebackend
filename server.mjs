@@ -103,11 +103,17 @@ export async function createApp({database,publicOrigin,adminPassword,now,store:p
   return {server,store,close:()=>new Promise(resolve=>{server.close(async()=>{await store.close();resolve();});server.closeIdleConnections();})};
 }
 
-if(process.argv[1] && path.resolve(process.argv[1])===fileURLToPath(import.meta.url)) {
+if(!process.env.VERCEL && process.argv[1] && path.resolve(process.argv[1])===fileURLToPath(import.meta.url)) {
   const port=Number(process.env.PORT || 3000);
   const host=process.env.HOST || '127.0.0.1';
   if(host!=='127.0.0.1' && !process.env.PUBLIC_ORIGIN)throw Error('Defina PUBLIC_ORIGIN antes de disponibilizar o servidor em rede.');
   const app=await createApp({publicOrigin:process.env.PUBLIC_ORIGIN,adminPassword:process.env.MDL_ADMIN_PASSWORD});
   app.server.listen(port,host,()=>console.log(`Mestre dos Lanches: http://localhost:${port}\nPainel da lanchonete: http://localhost:${port}/painel.html`));
   for(const signal of ['SIGINT','SIGTERM'])process.on(signal,()=>app.close().then(()=>process.exit(0)));
+}
+
+// Suporta projetos Vercel que apontem para este arquivo como entrada.
+export default async function handler(req,res){
+  try{const {default:vercelHandler}=await import('./api/index.mjs');return await vercelHandler(req,res);}
+  catch(error){console.error('Falha na entrada da API:',error.code || error.name);if(!res.headersSent){res.writeHead(503,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'});res.end(JSON.stringify({ok:false,code:'STARTUP_FAILED',error:'A API não iniciou. Confira os logs e a configuração do deploy no Vercel.'}));}else res.end();}
 }
