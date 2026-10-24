@@ -14,9 +14,9 @@ test('avisos: um som e uma notificação por pedido novo, sem repetir no polling
     window.MDLAlerts.armSound();return window.MDLAlerts;
   }
   const a=tab(),b=tab(),old={id:'old',code:'OLD',status:'novo'},fresh={id:'new',code:'NEW',status:'novo'};
-  a.ingest([old]);b.ingest([old]);assert.equal(tones,32);assert.equal(notifications.length,1);
+  a.ingest([old]);b.ingest([old]);assert.equal(tones,40);assert.equal(notifications.length,1);
   a.ingest([fresh,old]);a.ingest([fresh,old]);b.ingest([fresh,old]);
-  assert.equal(tones,64);assert.equal(notifications.length,2);assert.equal(notifications[1].tag,'pedido-new');
+  assert.equal(tones,80);assert.equal(notifications.length,2);assert.equal(notifications[1].tag,'pedido-new');
 });
 
 test('avisos: pedido recebido antes de ativar aparece e notifica após permitir acesso',async()=>{
@@ -38,10 +38,11 @@ test('avisos: pedido recebido antes de ativar aparece e notifica após permitir 
   window.MDLAlerts.ingest([{...order,status:'preparando'}]);assert.equal(node('#new-order-notice').textContent,'');
 });
 
-test('avisos: chama delivery com voz em portugues no volume maximo',()=>{
- const calls=[],storage=new Map();const window={SpeechSynthesisUtterance:class{constructor(text){this.text=text;}},speechSynthesis:{getVoices:()=>[{lang:'pt-BR',name:'Voz brasileira'},{lang:'pt-BR',name:'Voz brasileira Natural Online'}],speak:call=>calls.push(call)}};
+test('avisos: sinos alternados com ressonancia metalica substituem a voz',()=>{
+ const frequencies=[],stops=[],storage=new Map();let speechCalls=0;
+ class Audio{currentTime=0;destination={};resume(){return Promise.resolve();}createOscillator(){const oscillator={frequency:{},connect(){},start(){frequencies.push(oscillator.frequency.value);},stop(time){stops.push(time);}};return oscillator;}createGain(){return {connect(){},gain:{setValueAtTime(){},linearRampToValueAtTime(){},exponentialRampToValueAtTime(){}}};}}
+ const window={AudioContext:Audio,speechSynthesis:{speak(){speechCalls++;}}};
  vm.runInNewContext(source,{window,document:{querySelector:()=>({addEventListener(){}})},localStorage:{getItem:key=>storage.get(key),setItem:(key,value)=>storage.set(key,value)}});
- window.MDLAlerts.armSound();
- const order={id:'voice',code:'VOICE',status:'novo'};window.MDLAlerts.ingest([order]);window.MDLAlerts.ingest([order]);
- assert.equal(calls.length,1);assert.match(calls[0].text,/Delivery!/);assert.equal(calls[0].lang,'pt-BR');assert.equal(calls[0].volume,1);assert.equal(calls[0].voice.name,'Voz brasileira Natural Online');assert.equal(calls[0].pitch,1);assert.equal(calls[0].rate,.95);assert.equal(calls[0].text,'Delivery! ... Delivery! ... Delivery!');
+ window.MDLAlerts.armSound();window.MDLAlerts.ingest([{id:'bell',code:'BELL',status:'novo'}]);
+ assert.equal(speechCalls,0);assert.equal(frequencies.length,40);assert.equal(frequencies[0],740);assert.equal(frequencies[4],988);assert.equal(frequencies[1],740*2.71);assert(Math.max(...stops)>7);
 });
