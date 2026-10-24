@@ -1,4 +1,5 @@
 import http from 'node:http';
+import { isIP } from 'node:net';
 import { readFile, mkdir } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -10,13 +11,14 @@ const frontendRoot=path.resolve(root,'../frontend');
 const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.svg':'image/svg+xml','.jpg':'image/jpeg','.png':'image/png','.webp':'image/webp'};
 const bad=(message,status=400)=>{ throw Object.assign(new Error(message),{status}); };
 
-export async function createApp({database,publicOrigin,adminPassword,now,addressService=createAddressService()}={}) {
-  if (!database) { await mkdir(path.join(root,'data'),{recursive:true});database=path.join(root,'data','loja.sqlite'); }
+export async function createApp({database,publicOrigin,adminPassword,now,store:providedStore,apiOrigin,trustVercelProxy=false,serveFrontend=true,addressService=createAddressService()}={}) {
+  if (!database && !providedStore) { await mkdir(path.join(root,'data'),{recursive:true});database=path.join(root,'data','loja.sqlite'); }
   const config=JSON.parse(await readFile(path.join(root,'config','loja.json'),'utf8'));
-  const store=createStore(database,config,{now});
-  if (adminPassword && !store.hasAdmin()) store.setup(adminPassword);
+  const store=providedStore || createStore(database,config,{now});
+  if(adminPassword){if(store.ensureAdmin)await store.ensureAdmin(adminPassword);else if(!await store.hasAdmin())await store.setup(adminPassword);}
   const limits=new Map();
-  const rate=(key,max,interval)=>{
+  const rate=async(key,max,interval)=>{
+    if(store.consumeRateLimit){if(!await store.consumeRateLimit(key,max,interval))bad('Muitas tentativas. Aguarde alguns minutos.',429);return;}
     const now=Date.now();
     if (limits.size>5000) for(const [id,value] of limits) if (value.until<now) limits.delete(id);
     const current=limits.get(key);
@@ -33,52 +35,56 @@ export async function createApp({database,publicOrigin,adminPassword,now,address
       const host=req.headers.host || '';
       const actualOrigin=`http://${host}`;
       const expected=publicOrigin || actualOrigin;
-      if (publicOrigin ? host !== new URL(publicOrigin).host : !/^(localhost|127\.0\.0\.1):\d+$/.test(host)) bad('Host não permitido.',403);
+      if (publicOrigin ? ![new URL(publicOrigin).host,...(apiOrigin?[new URL(apiOrigin).host]:[])].includes(host) : !/^(localhost|127\.0\.0\.1):\d+$/.test(host)) bad('Host não permitido.',403);
       const url=new URL(req.url,actualOrigin);
       const isMutation=['POST','PATCH','PUT','DELETE'].includes(req.method);
       if (isMutation && req.headers.origin !== expected) bad('Origem não permitida.',403);
-      const peer=req.socket.remoteAddress;
+      const forwarded=trustVercelProxy?String(req.headers['x-vercel-forwarded-for'] || req.headers['x-forwarded-for'] || '').split(',')[0].trim():'';
+      const peer=isIP(forwarded)?forwarded:req.socket.remoteAddress;
       const session=(req.headers.cookie || '').split(';').map(part=>part.trim()).find(part=>part.startsWith('mdl_session='))?.slice(12);
-      const admin=()=>{if(!store.authenticated(session))bad('Entre no painel para continuar.',401);};
+      const admin=async()=>{if(!(await store.authenticated(session)))bad('Entre no painel para continuar.',401);};
       const body=async()=>{
         if (!(req.headers['content-type']||'').startsWith('application/json')) bad('Envie os dados em JSON.',415);
         const chunks=[];let length=0;
-        for await (const chunk of req) { length+=chunk.length;if(length>32768)bad('Pedido muito grande.',413);chunks.push(chunk); }
+        if(req.body!==undefined){const encoded=Buffer.isBuffer(req.body)?req.body:Buffer.from(typeof req.body==='string'?req.body:JSON.stringify(req.body));if(encoded.length>32768)bad('Pedido muito grande.',413);chunks.push(encoded);}
+        else for await (const chunk of req) { length+=chunk.length;if(length>32768)bad('Pedido muito grande.',413);chunks.push(chunk); }
         try { const result=JSON.parse(Buffer.concat(chunks).toString());if(!result || typeof result!=='object' || Array.isArray(result))bad('Dados inválidos.');return result; }
         catch(error) {if(error.status)throw error;bad('Dados inválidos.');}
       };
       const localSetup=()=>!publicOrigin && ['127.0.0.1','::1','::ffff:127.0.0.1'].includes(peer);
       const cookie=token=>`mdl_session=${token}; HttpOnly; SameSite=Strict; Path=/; Max-Age=43200${publicOrigin?.startsWith('https:')?'; Secure':''}`;
-      if(req.method==='GET' && url.pathname==='/api/catalog')return json(store.catalog());
-      if(req.method==='GET' && url.pathname==='/api/store-status')return json({acceptingOrders:store.settings().acceptingOrders});
-      if(req.method==='PATCH' && url.pathname==='/api/admin/store-status'){admin();return json(store.updateStoreStatus(await body()));}
+      if(req.method==='GET' && (url.pathname==='/api/health' || (!serveFrontend && url.pathname==='/')))return json({ok:true,service:'Mestre dos Lanches API'});
+      if(!serveFrontend && !url.pathname.startsWith('/api/'))bad('Endereço não encontrado.',404);
+      if(req.method==='GET' && url.pathname==='/api/catalog')return json((await store.catalog()));
+      if(req.method==='GET' && url.pathname==='/api/store-status')return json({acceptingOrders:(await store.settings()).acceptingOrders});
+      if(req.method==='PATCH' && url.pathname==='/api/admin/store-status'){await admin();return json((await store.updateStoreStatus(await body())));}
       const cepMatch=url.pathname.match(/^\/api\/address\/(\d{8})$/);
-      if(req.method==='GET' && cepMatch){rate(`cep:${peer}`,40,60000);return json(await addressService.lookup(cepMatch[1]));}
-      if(req.method==='GET' && url.pathname==='/api/admin/session')return json({authenticated:store.authenticated(session),needsSetup:!store.hasAdmin() && localSetup()});
+      if(req.method==='GET' && cepMatch){await rate(`cep:${peer}`,40,60000);return json(await addressService.lookup(cepMatch[1]));}
+      if(req.method==='GET' && url.pathname==='/api/admin/session')return json({authenticated:(await store.authenticated(session)),needsSetup:!(await store.hasAdmin()) && localSetup()});
       if(req.method==='POST' && url.pathname==='/api/admin/setup') {
         if(!localSetup())bad('Configure o acesso pelo servidor local.',403);
-        rate(`auth:${peer}`,8,600000);const input=await body();store.setup(input.password);
-        res.setHeader('Set-Cookie',cookie(store.login(input.password)));return json({ok:true},201);
+        await rate(`auth:${peer}`,8,600000);const input=await body();(await store.setup(input.password));
+        res.setHeader('Set-Cookie',cookie((await store.login(input.password))));return json({ok:true},201);
       }
       if(req.method==='POST' && url.pathname==='/api/admin/login') {
-        rate(`auth:${peer}`,8,600000);const input=await body();res.setHeader('Set-Cookie',cookie(store.login(input.password)));return json({ok:true});
+        await rate(`auth:${peer}`,8,600000);const input=await body();res.setHeader('Set-Cookie',cookie((await store.login(input.password))));return json({ok:true});
       }
       if(req.method==='POST' && url.pathname==='/api/admin/logout') {
-        admin();store.logout(session);res.setHeader('Set-Cookie','mdl_session=; HttpOnly; SameSite=Strict; Path=/; Max-Age=0');return json({ok:true});
+        await admin();(await store.logout(session));res.setHeader('Set-Cookie','mdl_session=; HttpOnly; SameSite=Strict; Path=/; Max-Age=0');return json({ok:true});
       }
-      if(req.method==='GET' && url.pathname==='/api/admin/orders') {admin();return json({orders:store.orders()});}
-      if(req.method==='PATCH' && url.pathname==='/api/admin/settings') {admin();return json(store.updateSettings(await body()));}
+      if(req.method==='GET' && url.pathname==='/api/admin/orders') {await admin();return json({orders:(await store.orders())});}
+      if(req.method==='PATCH' && url.pathname==='/api/admin/settings') {await admin();return json((await store.updateSettings(await body())));}
       const productMatch=url.pathname.match(/^\/api\/admin\/products\/([a-zA-Z0-9_-]+)$/);
-      if(req.method==='PATCH' && productMatch) {admin();store.updateProduct(productMatch[1],await body());return json({ok:true});}
+      if(req.method==='PATCH' && productMatch) {await admin();(await store.updateProduct(productMatch[1],await body()));return json({ok:true});}
       const statusMatch=url.pathname.match(/^\/api\/admin\/orders\/([a-f0-9-]+)$/);
-      if(req.method==='GET' && statusMatch) {admin();return json(store.order(statusMatch[1]));}
-      if(req.method==='PATCH' && statusMatch) {admin();return json(store.changeStatus(statusMatch[1],await body()));}
+      if(req.method==='GET' && statusMatch) {await admin();return json((await store.order(statusMatch[1])));}
+      if(req.method==='PATCH' && statusMatch) {await admin();return json((await store.changeStatus(statusMatch[1],await body())));}
       if(req.method==='POST' && url.pathname==='/api/orders') {
-        rate(`order:${peer}`,30,600000);const input=await body();const verifiedAddress=input.fulfillment==='entrega'?await addressService.verify(input.deliveryAddress):null;const order=store.placeOrder(input,req.headers['idempotency-key'],{verifiedAddress});return json(order,order.replayed?200:201);
+        await rate(`order:${peer}`,30,600000);const input=await body();const verifiedAddress=input.fulfillment==='entrega'?await addressService.verify(input.deliveryAddress):null;const order=(await store.placeOrder(input,req.headers['idempotency-key'],{verifiedAddress}));return json(order,order.replayed?200:201);
       }
       const trackingMatch=url.pathname.match(/^\/api\/orders\/([a-f0-9-]+)$/);
       if(req.method==='GET' && trackingMatch) {
-        rate(`track:${peer}`,300,60000);return json(store.track(trackingMatch[1],req.headers.authorization?.replace(/^Bearer /,'')));
+        await rate(`track:${peer}`,300,60000);return json((await store.track(trackingMatch[1],req.headers.authorization?.replace(/^Bearer /,''))));
       }
       if(url.pathname.startsWith('/api/'))bad('Endereço não encontrado.',404);
       if(!['GET','HEAD'].includes(req.method))bad('Método não permitido.',405);
@@ -95,7 +101,7 @@ export async function createApp({database,publicOrigin,adminPassword,now,address
     }
   });
   server.requestTimeout=15000;server.headersTimeout=10000;
-  return {server,store,close:()=>new Promise(resolve=>{server.close(()=>{store.close();resolve();});server.closeIdleConnections();})};
+  return {server,store,close:()=>new Promise(resolve=>{server.close(async()=>{await store.close();resolve();});server.closeIdleConnections();})};
 }
 
 if(process.argv[1] && path.resolve(process.argv[1])===fileURLToPath(import.meta.url)) {
