@@ -592,6 +592,40 @@
           "imagemAlt": "Imagem ilustrativa de Cream cheese extra"
         }
       ]
+    },
+    {
+      "id": "combos",
+      "nome": "Combos",
+      "itens": [
+        {
+          "id": "combo-individual",
+          "nome": "Combo individual",
+          "desc": "1 hambúrguer artesanal, batata frita e 1 Coca-Cola de 350 ml. Consulte as opções de hambúrguer.",
+          "preco": null,
+          "precoInicial": 29.9,
+          "pedidoPendente": true,
+          "imagem": "assets/lanches/supremo.webp",
+          "imagemAlt": "Hambúrguer artesanal ilustrativo do Combo individual"
+        },
+        {
+          "id": "combo-casal",
+          "nome": "Combo casal",
+          "desc": "2 hambúrgueres artesanais, porção de batata e 2 Coca-Colas de 350 ml. Consulte as opções de hambúrguer.",
+          "preco": 54.9,
+          "pedidoPendente": true,
+          "imagem": "assets/lanches/supremo.webp",
+          "imagemAlt": "Hambúrguer artesanal ilustrativo do Combo casal"
+        },
+        {
+          "id": "combo-familia",
+          "nome": "Combo família",
+          "desc": "4 hambúrgueres artesanais, porção grande de batata e 1 Coca-Cola de 1 L. Consulte as opções de hambúrguer.",
+          "preco": 89.9,
+          "pedidoPendente": true,
+          "imagem": "assets/lanches/supremo.webp",
+          "imagemAlt": "Hambúrguer artesanal ilustrativo do Combo família"
+        }
+      ]
     }
   ]
 }

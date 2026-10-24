@@ -73,6 +73,7 @@ export async function createApp({database,publicOrigin,adminPassword,now,store:p
       }
       if(req.method==='GET' && url.pathname==='/api/admin/orders') {await admin();return json({orders:(await store.orders())});}
       if(req.method==='PATCH' && url.pathname==='/api/admin/settings') {await admin();return json((await store.updateSettings(await body())));}
+      if(req.method==='POST' && url.pathname==='/api/admin/products'){await admin();return json(await store.createProduct(await body()),201);}
       const productMatch=url.pathname.match(/^\/api\/admin\/products\/([a-zA-Z0-9_-]+)$/);
       if(req.method==='PATCH' && productMatch) {await admin();(await store.updateProduct(productMatch[1],await body()));return json({ok:true});}
       const statusMatch=url.pathname.match(/^\/api\/admin\/orders\/([a-f0-9-]+)$/);

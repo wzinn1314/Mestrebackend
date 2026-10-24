@@ -65,3 +65,11 @@ test('Vercel: Firestore exige credenciais próprias sem depender de Turso',async
   const handler=createVercelHandler({env,initializeApp:async()=>{initialized=true;return {server:{listeners:()=>[(req,res)=>{res.writeHead(200);res.end('{"ok":true}');}]}};}});
   await handler({url:'/api/index?route=health'},response);assert.equal(status,200);assert.equal(initialized,true);
 });
+
+test('Firestore: novo lanche aparece e pode ser comprado em outra instancia',async()=>{
+ const db=memoryFirestore(),a=await createFirestoreStore(db,seed),b=await createFirestoreStore(db,seed);
+ const {id}=await a.createProduct({name:'Especial',description:'Carne e queijo',category:'lanches',priceCents:3500,active:true});
+ const item=(await b.catalog()).cardapio[0].itens.find(item=>item.id===id);assert.equal(item.preco,35);
+ await b.updateProduct(id,{priceCents:3600,active:true});
+ const order=await b.placeOrder({...body(),paymentMethod:'pix',needsChange:false,changeForCents:null,items:[{id,qty:1}],expectedTotalCents:3600},randomUUID());assert.equal(order.totalCents,3600);
+});
