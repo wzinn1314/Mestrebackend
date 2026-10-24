@@ -1,4 +1,4 @@
-# MestredoslanchesBackend
+# Mestrebackend
 
 PostgreSQL local instalado e integração Vercel: consulte [POSTGRESQL.md](POSTGRESQL.md). Use `DATABASE_PROVIDER=postgres` e `DATABASE_URL` para selecionar este banco.
 
