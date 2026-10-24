@@ -21,3 +21,11 @@ test('API: preserva respostas válidas e mensagens de erro do servidor',async()=
   assert.equal((await readJson(response('{"ok":true}'))).ok,true);
   assert.equal((await readJson(response('{"error":"Confira o endereço."}',400))).error,'Confira o endereço.');
 });
+
+test('API publicada: erro de roteamento não manda o usuário abrir localhost',async()=>{
+  context.window.location={hostname:'mestredoslanches.vercel.app'};
+  try{
+    await assert.rejects(readJson(response('NOT_FOUND',404,'text/plain')),error=>error.code==='WRONG_SERVER' && error.message.includes('/api') && !error.message.includes('localhost'));
+    await assert.rejects(readJson(response('',503)),error=>error.code==='INCOMPLETE_RESPONSE' && !error.message.includes('localhost'));
+  }finally{delete context.window.location;}
+});
