@@ -1,5 +1,7 @@
 # MestredoslanchesBackend
 
+PostgreSQL local instalado e integração Vercel: consulte [POSTGRESQL.md](POSTGRESQL.md). Use `DATABASE_PROVIDER=postgres` e `DATABASE_URL` para selecionar este banco.
+
 Para o projeto Firebase `mestredoslanches`, siga [a configuração do Cloud Firestore](FIREBASE.md). Selecione `DATABASE_PROVIDER=firestore`; as instruções de Turso abaixo são apenas para o provedor anterior.
 
 API do Mestre dos Lanches para catálogo, pedidos, autenticação da empresa, acompanhamento e atualização dos status. Node.js 24. Em uso local, mantém SQLite em arquivo. No Vercel, usa Turso/libSQL externo por meio de `@libsql/client`.

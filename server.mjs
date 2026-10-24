@@ -107,7 +107,13 @@ if(!process.env.VERCEL && process.argv[1] && path.resolve(process.argv[1])===fil
   const port=Number(process.env.PORT || 3000);
   const host=process.env.HOST || '127.0.0.1';
   if(host!=='127.0.0.1' && !process.env.PUBLIC_ORIGIN)throw Error('Defina PUBLIC_ORIGIN antes de disponibilizar o servidor em rede.');
-  const app=await createApp({publicOrigin:process.env.PUBLIC_ORIGIN,adminPassword:process.env.MDL_ADMIN_PASSWORD});
+  let store;
+  if(process.env.DATABASE_PROVIDER==='postgres'){
+    const {createPostgresStore}=await import('./lib/postgres-store.mjs');
+    const seed=JSON.parse(await readFile(new URL('./config/loja.json',import.meta.url),'utf8'));
+    store=await createPostgresStore(process.env.DATABASE_URL,seed);
+  }
+  const app=await createApp({store,publicOrigin:process.env.PUBLIC_ORIGIN,adminPassword:process.env.MDL_ADMIN_PASSWORD});
   app.server.listen(port,host,()=>console.log(`Mestre dos Lanches: http://localhost:${port}\nPainel da lanchonete: http://localhost:${port}/painel.html`));
   for(const signal of ['SIGINT','SIGTERM'])process.on(signal,()=>app.close().then(()=>process.exit(0)));
 }
