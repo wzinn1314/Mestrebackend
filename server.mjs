@@ -3,7 +3,6 @@ import { isIP } from 'node:net';
 import { readFile, mkdir } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { createStore } from './lib/store.mjs';
 import { createAddressService } from './lib/address.mjs';
 
 const root=path.dirname(fileURLToPath(import.meta.url));
@@ -14,7 +13,7 @@ const bad=(message,status=400)=>{ throw Object.assign(new Error(message),{status
 export async function createApp({database,publicOrigin,adminPassword,now,store:providedStore,apiOrigin,trustVercelProxy=false,serveFrontend=true,addressService=createAddressService()}={}) {
   if (!database && !providedStore) { await mkdir(path.join(root,'data'),{recursive:true});database=path.join(root,'data','loja.sqlite'); }
   const config=JSON.parse(await readFile(path.join(root,'config','loja.json'),'utf8'));
-  const store=providedStore || createStore(database,config,{now});
+  const store=providedStore || (await import('./lib/store.mjs')).createStore(database,config,{now});
   if(adminPassword){if(store.ensureAdmin)await store.ensureAdmin(adminPassword);else if(!await store.hasAdmin())await store.setup(adminPassword);}
   const limits=new Map();
   const rate=async(key,max,interval)=>{
