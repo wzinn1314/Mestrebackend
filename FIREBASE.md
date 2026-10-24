@@ -13,7 +13,7 @@ No projeto **do backend** no Vercel, em **Settings → Environment Variables**, 
 - `FIREBASE_CLIENT_EMAIL`: valor de `client_email` do JSON.
 - `FIREBASE_PRIVATE_KEY`: valor completo de `private_key` do JSON, incluindo BEGIN/END PRIVATE KEY. Aceita quebras de linha reais ou `\n`.
 - `PUBLIC_ORIGIN`: `https://mestredoslanches.vercel.app`
-- `API_ORIGIN`: `https://mestredoslanchesbackend.vercel.app`
+- `API_ORIGIN`: `https://mestrebackend.vercel.app`
 - `MDL_ADMIN_PASSWORD`: senha do primeiro acesso da empresa; 8 números ou pelo menos 12 caracteres. Somente o hash é salvo no banco. Alterar esta variável depois não altera a senha já cadastrada.
 
 Não é necessário configurar variáveis Turso ao selecionar Firestore. O `firebaseConfig` do aplicativo Web não substitui a credencial administrativa e não é necessário nesta integração.
@@ -28,7 +28,7 @@ O primeiro início cria `mdl_settings`, `mdl_products` e o administrador em `mdl
 
 ## Verificação
 
-1. Abra `https://mestredoslanchesbackend.vercel.app/api/health` e confirme `ok: true`.
+1. Abra `https://mestrebackend.vercel.app/api/health` e confirme `ok: true`.
 2. Confira o mesmo caminho `/api/health` no frontend.
 3. Entre como empresa, envie um pedido pelo cliente e atualize o status no painel. Recarregue a tela do cliente e confira o acompanhamento.
 4. Confira total, troco, cancelamento e comprovante.

@@ -45,7 +45,7 @@ test('Vercel: cliente não pode trocar o banco para um arquivo local',async()=>{
 
 test('Vercel: frontend encaminha somente /api para o backend configurado',async()=>{
   const config=JSON.parse(await readFile(new URL('../../frontend/vercel.json',import.meta.url),'utf8'));
-  assert.deepEqual(config.rewrites,[{source:'/api/:path*',destination:'https://mestredoslanchesbackend.vercel.app/api/:path*'}]);
+  assert.deepEqual(config.rewrites,[{source:'/api/:path*',destination:'https://mestrebackend.vercel.app/api/:path*'}]);
 });
 
 test('Vercel: entrada principal não abre servidor nem SQLite local na nuvem',async()=>{

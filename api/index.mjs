@@ -6,7 +6,7 @@ async function initialize(env) {
   if(env.DATABASE_PROVIDER==='postgres'){
     const {createPostgresStore}=await import('../lib/postgres-store.mjs');
     const store=await createPostgresStore(env.DATABASE_URL,seed);
-    try{return await createApp({store,publicOrigin:env.PUBLIC_ORIGIN,apiOrigin:env.API_ORIGIN||'https://mestredoslanchesbackend.vercel.app',adminPassword:env.MDL_ADMIN_PASSWORD,trustVercelProxy:env.VERCEL==='1',serveFrontend:false});}
+    try{return await createApp({store,publicOrigin:env.PUBLIC_ORIGIN,apiOrigin:env.API_ORIGIN||'https://mestrebackend.vercel.app',adminPassword:env.MDL_ADMIN_PASSWORD,trustVercelProxy:env.VERCEL==='1',serveFrontend:false});}
     catch(error){await store.close();throw error;}
   }
   if(env.DATABASE_PROVIDER==='firestore'){
@@ -15,14 +15,14 @@ async function initialize(env) {
     const db=getFirestore(firebase);
     try{
       const store=await createFirestoreStore(db,seed);
-      return await createApp({store,publicOrigin:env.PUBLIC_ORIGIN,apiOrigin:env.API_ORIGIN||'https://mestredoslanchesbackend.vercel.app',adminPassword:env.MDL_ADMIN_PASSWORD,trustVercelProxy:env.VERCEL==='1',serveFrontend:false});
+      return await createApp({store,publicOrigin:env.PUBLIC_ORIGIN,apiOrigin:env.API_ORIGIN||'https://mestrebackend.vercel.app',adminPassword:env.MDL_ADMIN_PASSWORD,trustVercelProxy:env.VERCEL==='1',serveFrontend:false});
     }catch(error){await db.terminate();await deleteApp(firebase);throw error;}
   }
   const [{createClient},{createRemoteStore}]=await Promise.all([import('@libsql/client/web'),import('../lib/remote-store.mjs')]);
   const client=createClient({url:env.TURSO_DATABASE_URL,authToken:env.TURSO_AUTH_TOKEN});
   try {
     const store=await createRemoteStore(client,seed);
-    return await createApp({store,publicOrigin:env.PUBLIC_ORIGIN,apiOrigin:env.API_ORIGIN || 'https://mestredoslanchesbackend.vercel.app',adminPassword:env.MDL_ADMIN_PASSWORD,trustVercelProxy:env.VERCEL==='1',serveFrontend:false});
+    return await createApp({store,publicOrigin:env.PUBLIC_ORIGIN,apiOrigin:env.API_ORIGIN || 'https://mestrebackend.vercel.app',adminPassword:env.MDL_ADMIN_PASSWORD,trustVercelProxy:env.VERCEL==='1',serveFrontend:false});
   } catch(error) { client.close();throw error; }
 }
 
@@ -39,7 +39,7 @@ export function createVercelHandler({env=process.env,initializeApp=initialize}={
     }
     try {
       const publicUrl=new URL(env.PUBLIC_ORIGIN);
-      const apiUrl=new URL(env.API_ORIGIN || 'https://mestredoslanchesbackend.vercel.app');
+      const apiUrl=new URL(env.API_ORIGIN || 'https://mestrebackend.vercel.app');
       if(publicUrl.protocol!=='https:' || publicUrl.origin!==env.PUBLIC_ORIGIN || apiUrl.protocol!=='https:' || apiUrl.origin!==(env.API_ORIGIN || apiUrl.origin) || (env.DATABASE_PROVIDER&&!['postgres','firestore','turso'].includes(env.DATABASE_PROVIDER)) || (postgres&&!['postgres:','postgresql:'].includes(new URL(env.DATABASE_URL).protocol)) || (!postgres&&!firestore&&!['libsql:','https:'].includes(new URL(env.TURSO_DATABASE_URL).protocol)))throw Object.assign(Error('Invalid configuration'),{code:'INVALID_CONFIGURATION'});
       initialization ||= initializeApp(env);
       const app=await initialization;

@@ -41,7 +41,7 @@ Um banco rodando em `localhost` neste computador não é acessível ao Vercel. P
 - `DATABASE_PROVIDER=postgres`
 - `DATABASE_URL`: conexão do banco hospedado com TLS, fornecida pelo provedor. Prefira a conexão com pool para ambiente serverless.
 - `PUBLIC_ORIGIN=https://mestredoslanches.vercel.app`
-- `API_ORIGIN=https://mestredoslanchesbackend.vercel.app`
+- `API_ORIGIN=https://mestrebackend.vercel.app`
 - `MDL_ADMIN_PASSWORD`: senha inicial, para um banco novo. Não muda a senha já existente.
 
 Não desative validação TLS. Nunca envie DATABASE_URL ao GitHub ou ao frontend. O primeiro início cria esquema e catálogo; pedidos locais não são transferidos automaticamente. O script de migração pode ser executado deste computador apontando para um destino novo hospedado para transferir os dados preservados.

@@ -42,13 +42,13 @@ npm test
 ## Frontend e backend no Vercel
 
 1. Crie um banco na sua conta [Turso](https://app.turso.tech/) e obtenha a URL `libsql://...` e um token de acesso. Esses valores não devem ser enviados ao GitHub.
-2. Importe o repositório do frontend no Vercel, com preset **Other**, sem comando de build e sem pasta de saída personalizada. O `vercel.json` do frontend encaminha `/api/` para `https://mestredoslanchesbackend.vercel.app`.
+2. Importe o repositório do frontend no Vercel, com preset **Other**, sem comando de build e sem pasta de saída personalizada. O `vercel.json` do frontend encaminha `/api/` para `https://mestrebackend.vercel.app`.
 3. No projeto do backend no Vercel, use preset **Other**, Node.js **24.x**, sem comando de build e sem pasta de saída personalizada. Mantenha `vercel.json` e a função `api/index.mjs` na raiz do repositório.
 4. Em **Settings → Environment Variables**, configure as variáveis abaixo para Production. Depois faça um novo deploy:
    - `TURSO_DATABASE_URL`: URL do banco criado.
    - `TURSO_AUTH_TOKEN`: token privado do banco.
    - `PUBLIC_ORIGIN`: endereço HTTPS exato do frontend, sem barra no final.
-   - `API_ORIGIN`: `https://mestredoslanchesbackend.vercel.app`.
+   - `API_ORIGIN`: `https://mestrebackend.vercel.app`.
    - `MDL_ADMIN_PASSWORD`: senha que será usada no primeiro acesso da empresa. Não fica no repositório; somente seu hash é salvo no banco.
 5. Abra `/api/health` no backend. Depois da configuração e conexão com o banco, deve retornar `{"ok":true,"service":"Mestre dos Lanches API"}`. Abra também `/api/health` no endereço do frontend para conferir o encaminhamento.
 6. Teste, pelo frontend, o login da empresa, um pedido, seu acompanhamento, cancelamento, troco, notificação e comprovante.
