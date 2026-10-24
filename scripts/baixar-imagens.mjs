@@ -1,0 +1,3 @@
+import fs from 'node:fs/promises';
+const items=JSON.parse(await fs.readFile(new URL('../imports/cardapio/'+(process.argv[2] || 'imagens-referencia.json'),import.meta.url),'utf8'));
+for(const item of items){try{const response=await fetch(item.url,{signal:AbortSignal.timeout(25000)});if(!response.ok || !response.headers.get('content-type')?.startsWith('image/'))throw Error('HTTP '+response.status);const data=Buffer.from(await response.arrayBuffer());await fs.writeFile(new URL('../../frontend/assets/lanches/'+(item.file || item.id+'.jpg'),import.meta.url),data);console.log(item.id+': '+data.length);}catch(error){console.log(item.id+': ERRO '+error.message);process.exitCode=1;}}

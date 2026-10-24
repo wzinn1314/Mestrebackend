@@ -1,0 +1,108 @@
+import http from 'node:http';
+import { readFile, mkdir } from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { createStore } from './lib/store.mjs';
+import { createAddressService } from './lib/address.mjs';
+
+const root=path.dirname(fileURLToPath(import.meta.url));
+const frontendRoot=path.resolve(root,'../frontend');
+const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.svg':'image/svg+xml','.jpg':'image/jpeg','.png':'image/png','.webp':'image/webp'};
+const bad=(message,status=400)=>{ throw Object.assign(new Error(message),{status}); };
+
+export async function createApp({database,publicOrigin,adminPassword,now,addressService=createAddressService()}={}) {
+  if (!database) { await mkdir(path.join(root,'data'),{recursive:true});database=path.join(root,'data','loja.sqlite'); }
+  const config=JSON.parse(await readFile(path.join(root,'config','loja.json'),'utf8'));
+  const store=createStore(database,config,{now});
+  if (adminPassword && !store.hasAdmin()) store.setup(adminPassword);
+  const limits=new Map();
+  const rate=(key,max,interval)=>{
+    const now=Date.now();
+    if (limits.size>5000) for(const [id,value] of limits) if (value.until<now) limits.delete(id);
+    const current=limits.get(key);
+    if (!current || current.until<now) { limits.set(key,{count:1,until:now+interval});return; }
+    if (++current.count>max) bad('Muitas tentativas. Aguarde alguns minutos.',429);
+  };
+  const server=http.createServer(async(req,res)=>{
+    res.setHeader('X-Content-Type-Options','nosniff');
+    res.setHeader('Referrer-Policy','no-referrer');
+    res.setHeader('X-Frame-Options','DENY');
+    res.setHeader('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://images.unsplash.com https://qd.thewisecloud.com; frame-src https://maps.google.com; connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'");
+    const json=(body,status=200)=>{res.writeHead(status,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'});res.end(JSON.stringify(body));};
+    try {
+      const host=req.headers.host || '';
+      const actualOrigin=`http://${host}`;
+      const expected=publicOrigin || actualOrigin;
+      if (publicOrigin ? host !== new URL(publicOrigin).host : !/^(localhost|127\.0\.0\.1):\d+$/.test(host)) bad('Host não permitido.',403);
+      const url=new URL(req.url,actualOrigin);
+      const isMutation=['POST','PATCH','PUT','DELETE'].includes(req.method);
+      if (isMutation && req.headers.origin !== expected) bad('Origem não permitida.',403);
+      const peer=req.socket.remoteAddress;
+      const session=(req.headers.cookie || '').split(';').map(part=>part.trim()).find(part=>part.startsWith('mdl_session='))?.slice(12);
+      const admin=()=>{if(!store.authenticated(session))bad('Entre no painel para continuar.',401);};
+      const body=async()=>{
+        if (!(req.headers['content-type']||'').startsWith('application/json')) bad('Envie os dados em JSON.',415);
+        const chunks=[];let length=0;
+        for await (const chunk of req) { length+=chunk.length;if(length>32768)bad('Pedido muito grande.',413);chunks.push(chunk); }
+        try { const result=JSON.parse(Buffer.concat(chunks).toString());if(!result || typeof result!=='object' || Array.isArray(result))bad('Dados inválidos.');return result; }
+        catch(error) {if(error.status)throw error;bad('Dados inválidos.');}
+      };
+      const localSetup=()=>!publicOrigin && ['127.0.0.1','::1','::ffff:127.0.0.1'].includes(peer);
+      const cookie=token=>`mdl_session=${token}; HttpOnly; SameSite=Strict; Path=/; Max-Age=43200${publicOrigin?.startsWith('https:')?'; Secure':''}`;
+      if(req.method==='GET' && url.pathname==='/api/catalog')return json(store.catalog());
+      if(req.method==='GET' && url.pathname==='/api/store-status')return json({acceptingOrders:store.settings().acceptingOrders});
+      if(req.method==='PATCH' && url.pathname==='/api/admin/store-status'){admin();return json(store.updateStoreStatus(await body()));}
+      const cepMatch=url.pathname.match(/^\/api\/address\/(\d{8})$/);
+      if(req.method==='GET' && cepMatch){rate(`cep:${peer}`,40,60000);return json(await addressService.lookup(cepMatch[1]));}
+      if(req.method==='GET' && url.pathname==='/api/admin/session')return json({authenticated:store.authenticated(session),needsSetup:!store.hasAdmin() && localSetup()});
+      if(req.method==='POST' && url.pathname==='/api/admin/setup') {
+        if(!localSetup())bad('Configure o acesso pelo servidor local.',403);
+        rate(`auth:${peer}`,8,600000);const input=await body();store.setup(input.password);
+        res.setHeader('Set-Cookie',cookie(store.login(input.password)));return json({ok:true},201);
+      }
+      if(req.method==='POST' && url.pathname==='/api/admin/login') {
+        rate(`auth:${peer}`,8,600000);const input=await body();res.setHeader('Set-Cookie',cookie(store.login(input.password)));return json({ok:true});
+      }
+      if(req.method==='POST' && url.pathname==='/api/admin/logout') {
+        admin();store.logout(session);res.setHeader('Set-Cookie','mdl_session=; HttpOnly; SameSite=Strict; Path=/; Max-Age=0');return json({ok:true});
+      }
+      if(req.method==='GET' && url.pathname==='/api/admin/orders') {admin();return json({orders:store.orders()});}
+      if(req.method==='PATCH' && url.pathname==='/api/admin/settings') {admin();return json(store.updateSettings(await body()));}
+      const productMatch=url.pathname.match(/^\/api\/admin\/products\/([a-zA-Z0-9_-]+)$/);
+      if(req.method==='PATCH' && productMatch) {admin();store.updateProduct(productMatch[1],await body());return json({ok:true});}
+      const statusMatch=url.pathname.match(/^\/api\/admin\/orders\/([a-f0-9-]+)$/);
+      if(req.method==='GET' && statusMatch) {admin();return json(store.order(statusMatch[1]));}
+      if(req.method==='PATCH' && statusMatch) {admin();return json(store.changeStatus(statusMatch[1],await body()));}
+      if(req.method==='POST' && url.pathname==='/api/orders') {
+        rate(`order:${peer}`,30,600000);const input=await body();const verifiedAddress=input.fulfillment==='entrega'?await addressService.verify(input.deliveryAddress):null;const order=store.placeOrder(input,req.headers['idempotency-key'],{verifiedAddress});return json(order,order.replayed?200:201);
+      }
+      const trackingMatch=url.pathname.match(/^\/api\/orders\/([a-f0-9-]+)$/);
+      if(req.method==='GET' && trackingMatch) {
+        rate(`track:${peer}`,300,60000);return json(store.track(trackingMatch[1],req.headers.authorization?.replace(/^Bearer /,'')));
+      }
+      if(url.pathname.startsWith('/api/'))bad('Endereço não encontrado.',404);
+      if(!['GET','HEAD'].includes(req.method))bad('Método não permitido.',405);
+      const pathname=url.pathname==='/'?'/index.html':decodeURIComponent(url.pathname);
+      if(!/^\/(?:index\.html|pedidos\.html|informacoes\.html|painel\.html|acompanhar\.html|imprimir\.html|(?:assets|css|js)\/[a-zA-Z0-9_./-]+)$/.test(pathname) || pathname.split('/').includes('..'))bad('Arquivo não encontrado.',404);
+      const extension=path.extname(pathname);
+      if(!mime[extension])bad('Arquivo não encontrado.',404);
+      let content;
+      try{content=await readFile(path.join(frontendRoot,pathname));}catch{bad('Arquivo não encontrado.',404);}
+      res.writeHead(200,{'Content-Type':mime[extension],'Cache-Control':'no-cache'});res.end(req.method==='HEAD'?undefined:content);
+    }catch(error){
+      if(!res.headersSent)json({error:error.status?error.message:'Não foi possível processar a solicitação.'},error.status||500);
+      else res.end();
+    }
+  });
+  server.requestTimeout=15000;server.headersTimeout=10000;
+  return {server,store,close:()=>new Promise(resolve=>{server.close(()=>{store.close();resolve();});server.closeIdleConnections();})};
+}
+
+if(process.argv[1] && path.resolve(process.argv[1])===fileURLToPath(import.meta.url)) {
+  const port=Number(process.env.PORT || 3000);
+  const host=process.env.HOST || '127.0.0.1';
+  if(host!=='127.0.0.1' && !process.env.PUBLIC_ORIGIN)throw Error('Defina PUBLIC_ORIGIN antes de disponibilizar o servidor em rede.');
+  const app=await createApp({publicOrigin:process.env.PUBLIC_ORIGIN,adminPassword:process.env.MDL_ADMIN_PASSWORD});
+  app.server.listen(port,host,()=>console.log(`Mestre dos Lanches: http://localhost:${port}\nPainel da lanchonete: http://localhost:${port}/painel.html`));
+  for(const signal of ['SIGINT','SIGTERM'])process.on(signal,()=>app.close().then(()=>process.exit(0)));
+}

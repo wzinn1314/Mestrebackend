@@ -1,0 +1,659 @@
+{
+  "minimumSubtotalCents": 3000,
+  "nome": "Mestre dos Lanches",
+  "handle": "@mestre_dos_lanche",
+  "categoria": "Hamburgueria",
+  "slogan": "Venha saborear um dos melhores lanches de Salgueiro.",
+  "rating": 5,
+  "reviewsCount": 1,
+  "followers": "2.029",
+  "telefoneDisplay": "(87) 98859-2007",
+  "telefoneE164": "5587988592007",
+  "whatsapp": "https://wa.me/5587988592007?text=Ol%C3%A1!%20Quero%20fazer%20um%20pedido%20no%20Mestre%20dos%20Lanches.",
+  "instagram": "https://www.instagram.com/mestre_dos_lanche/",
+  "deliveryApp": "https://qro.go.link/aFSTH",
+  "deliveryAppNome": "QueroDelivery",
+  "endereco": "Rua José Adalberto, 194 - Santa Margarida",
+  "cidade": "Salgueiro - PE",
+  "cep": "56000-000",
+  "plusCode": "WV9M+J4",
+  "mapsQuery": "WV9M+J4 Santa Margarida, Salgueiro - PE",
+  "mapsUrl": "https://www.google.com/maps/search/?api=1&query=WV9M%2BJ4%20Santa%20Margarida%2C%20Salgueiro%20-%20PE",
+  "mapsEmbed": "https://maps.google.com/maps?q=WV9M%2BJ4%20Salgueiro%20PE&z=16&output=embed",
+  "horario": {
+    "abre": "19:00",
+    "fecha": "23:30",
+    "fechaMaps": "00:00",
+    "fechaDomingo": true,
+    "texto": "Segunda a sábado, das 19:00 às 23:30. Fechamos aos domingos."
+  },
+  "destaques": [
+    {
+      "titulo": "Toda quinta tem",
+      "texto": "Promoção especial toda quinta-feira."
+    },
+    {
+      "titulo": "Sucesso do momento",
+      "texto": "Os lanches que mais pedem agora."
+    },
+    {
+      "titulo": "O melhor de Salgueiro",
+      "texto": "Sabor local, feito para impressionar."
+    },
+    {
+      "titulo": "Pastéis",
+      "texto": "Massa crocante e recheio generoso."
+    },
+    {
+      "titulo": "Duplo cheddar",
+      "texto": "O clássico da casa, extra queijo."
+    }
+  ],
+  "cardapio": [
+    {
+      "id": "artesanais",
+      "nome": "Hambúrgueres na brasa",
+      "itens": [
+        {
+          "id": "art-supremo-150",
+          "nome": "Supremo · 1 carne (150 g)",
+          "desc": "Pão brioche, carne assada na brasa, cheddar, calabresa, cream cheese e molho.",
+          "preco": 22.9,
+          "imagem": "assets/lanches/supremo.webp",
+          "imagemAlt": "Imagem ilustrativa de Supremo · 1 carne (150 g)"
+        },
+        {
+          "id": "art-supremo-300",
+          "nome": "Supremo · 2 carnes (300 g)",
+          "desc": "Pão brioche, duas carnes assadas na brasa, cheddar, calabresa, cream cheese e molho.",
+          "preco": 31.9,
+          "imagem": "assets/lanches/supremo.webp",
+          "imagemAlt": "Imagem ilustrativa de Supremo · 2 carnes (300 g)"
+        },
+        {
+          "id": "art-costela-geleia-150",
+          "nome": "Costela com geleia de pimenta · 1 carne (150 g)",
+          "desc": "Pão brioche, tomate, alface, cebola caramelizada, carne na brasa, cheddar, costela e geleia de pimenta.",
+          "preco": 25.9,
+          "imagem": "assets/lanches/costela-geleia.jpg",
+          "imagemAlt": "Imagem ilustrativa de Costela com geleia de pimenta · 1 carne (150 g)"
+        },
+        {
+          "id": "art-costela-geleia-300",
+          "nome": "Costela com geleia de pimenta · 2 carnes (300 g)",
+          "desc": "Pão brioche, tomate, alface, cebola caramelizada, duas carnes na brasa, cheddar, costela e geleia de pimenta.",
+          "preco": 35.9,
+          "imagem": "assets/lanches/costela-geleia.jpg",
+          "imagemAlt": "Imagem ilustrativa de Costela com geleia de pimenta · 2 carnes (300 g)"
+        },
+        {
+          "id": "art-costela-cream-150",
+          "nome": "Costela com cream cheese · 1 carne (150 g)",
+          "desc": "Pão brioche, tomate, alface, cebola caramelizada, carne na brasa, cheddar, costela e cream cheese.",
+          "preco": 26.9,
+          "imagem": "assets/lanches/costela-cream.jpg",
+          "imagemAlt": "Imagem ilustrativa de Costela com cream cheese · 1 carne (150 g)"
+        },
+        {
+          "id": "art-costela-cream-300",
+          "nome": "Costela com cream cheese · 2 carnes (300 g)",
+          "desc": "Pão brioche, tomate, alface, cebola caramelizada, duas carnes na brasa, cheddar, costela e cream cheese.",
+          "preco": 36.9,
+          "imagem": "assets/lanches/costela-cream.jpg",
+          "imagemAlt": "Imagem ilustrativa de Costela com cream cheese · 2 carnes (300 g)"
+        },
+        {
+          "id": "art-tropical-150",
+          "nome": "Tropical de abacaxi · 1 carne (150 g)",
+          "desc": "Pão brioche, tomate, alface, abacaxi grelhado, carne na brasa, cheddar e molho especial da casa.",
+          "preco": 23.9,
+          "imagem": "assets/lanches/tropical.jpg",
+          "imagemAlt": "Imagem ilustrativa de Tropical de abacaxi · 1 carne (150 g)"
+        },
+        {
+          "id": "art-tropical-300",
+          "nome": "Tropical de abacaxi · 2 carnes (300 g)",
+          "desc": "Pão brioche, tomate, alface, abacaxi grelhado, duas carnes na brasa, cheddar e molho especial da casa.",
+          "preco": 32.9,
+          "imagem": "assets/lanches/tropical.jpg",
+          "imagemAlt": "Imagem ilustrativa de Tropical de abacaxi · 2 carnes (300 g)"
+        },
+        {
+          "id": "art-nutella-150",
+          "nome": "Nutella · 1 carne (150 g)",
+          "desc": "Pão brioche, carne na brasa, cheddar, Nutella e farofa crocante.",
+          "preco": 24.9,
+          "imagem": "assets/lanches/nutella.jpg",
+          "imagemAlt": "Imagem ilustrativa de Nutella · 1 carne (150 g)"
+        },
+        {
+          "id": "art-nutella-300",
+          "nome": "Nutella · 2 carnes (300 g)",
+          "desc": "Pão brioche, duas carnes na brasa, cheddar, Nutella e farofa crocante.",
+          "preco": 34.9,
+          "imagem": "assets/lanches/nutella.jpg",
+          "imagemAlt": "Imagem ilustrativa de Nutella · 2 carnes (300 g)"
+        },
+        {
+          "id": "art-bacon-150",
+          "nome": "Bacon Brasa · 1 carne (150 g)",
+          "desc": "Pão brioche, tomate, alface, carne na brasa, cheddar, bacon em tiras e molho especial da casa.",
+          "preco": 24.9,
+          "imagem": "assets/lanches/bacon.jpg",
+          "imagemAlt": "Imagem ilustrativa de Bacon Brasa · 1 carne (150 g)"
+        },
+        {
+          "id": "art-bacon-300",
+          "nome": "Bacon Brasa · 2 carnes (300 g)",
+          "desc": "Pão brioche, tomate, alface, duas carnes na brasa, cheddar, bacon em tiras e molho especial da casa.",
+          "preco": 34.9,
+          "imagem": "assets/lanches/bacon.jpg",
+          "imagemAlt": "Imagem ilustrativa de Bacon Brasa · 2 carnes (300 g)"
+        },
+        {
+          "id": "art-classico-150",
+          "nome": "Clássico · 1 carne (150 g)",
+          "desc": "Pão brioche, tomate, alface, carne na brasa, cheddar e molho da casa.",
+          "preco": 20.9,
+          "imagem": "assets/lanches/classico.webp",
+          "imagemAlt": "Imagem ilustrativa de Clássico · 1 carne (150 g)"
+        },
+        {
+          "id": "art-classico-300",
+          "nome": "Clássico · 2 carnes (300 g)",
+          "desc": "Pão brioche, tomate, alface, duas carnes na brasa, cheddar e molho da casa.",
+          "preco": 29.9,
+          "imagem": "assets/lanches/classico.webp",
+          "imagemAlt": "Imagem ilustrativa de Clássico · 2 carnes (300 g)"
+        }
+      ]
+    },
+    {
+      "id": "tradicionais",
+      "nome": "Hambúrgueres tradicionais",
+      "itens": [
+        {
+          "id": "trad-big-gigante",
+          "nome": "Big Gigante",
+          "desc": "Pão G, 3 carnes industriais, 2 queijos muçarela, presunto, ovo, cheddar, calabresa, bacon, batata palha, salada, ketchup e molho verde.",
+          "preco": 22,
+          "imagem": "assets/lanches/big-gigante.jpg",
+          "imagemAlt": "Imagem ilustrativa de Big Gigante"
+        },
+        {
+          "id": "trad-big-burguer",
+          "nome": "Big Burguer",
+          "desc": "Pão G, 2 carnes industriais, 2 queijos muçarela, presunto, ovo, bacon, cheddar, calabresa, batata palha, salada, ketchup e molho verde.",
+          "preco": 20,
+          "imagem": "assets/lanches/big-burguer.jpg",
+          "imagemAlt": "Imagem ilustrativa de Big Burguer"
+        },
+        {
+          "id": "trad-preferido",
+          "nome": "Preferido Burguer",
+          "desc": "Pão G, carne industrial, queijo muçarela, presunto, ovo, cheddar, calabresa, batata palha, salada, ketchup e molho verde.",
+          "preco": 18,
+          "imagem": "assets/lanches/preferido.webp",
+          "imagemAlt": "Imagem ilustrativa de Preferido Burguer"
+        },
+        {
+          "id": "trad-x-bacon",
+          "nome": "X-Bacon",
+          "desc": "Pão G, carne industrial, queijo muçarela, presunto, bacon, batata palha, salada, ketchup e molho verde.",
+          "preco": 15,
+          "imagem": "assets/lanches/x-bacon.jpg",
+          "imagemAlt": "Imagem ilustrativa de X-Bacon"
+        },
+        {
+          "id": "trad-x-calabresa",
+          "nome": "X-Calabresa",
+          "desc": "Pão G, carne industrial, queijo muçarela, presunto, calabresa, batata palha, salada, ketchup e molho verde.",
+          "preco": 14,
+          "imagem": "assets/lanches/x-calabresa.jpg",
+          "imagemAlt": "Imagem ilustrativa de X-Calabresa"
+        },
+        {
+          "id": "trad-dupla-carne",
+          "nome": "Dupla Carne",
+          "desc": "Pão G, 2 carnes industriais, queijo muçarela, presunto, batata palha, salada, ketchup e molho verde.",
+          "preco": 12,
+          "imagem": "assets/lanches/dupla-carne.webp",
+          "imagemAlt": "Imagem ilustrativa de Dupla Carne"
+        },
+        {
+          "id": "trad-egg-burguer",
+          "nome": "Egg-Burguer",
+          "desc": "Pão G, carne industrial, queijo muçarela, presunto, ovo, batata palha, salada, ketchup e molho verde.",
+          "preco": 13,
+          "imagem": "assets/lanches/egg-burguer.jpg",
+          "imagemAlt": "Imagem ilustrativa de Egg-Burguer"
+        },
+        {
+          "id": "trad-x-burguer",
+          "nome": "X-Burguer",
+          "desc": "Pão G, carne industrial, queijo muçarela, salada, ketchup e molho verde.",
+          "preco": 10,
+          "imagem": "assets/lanches/x-burguer.jpg",
+          "imagemAlt": "Imagem ilustrativa de X-Burguer"
+        }
+      ]
+    },
+    {
+      "id": "pizzas",
+      "nome": "Pizzas",
+      "itens": [
+        {
+          "id": "pizza-frango-8",
+          "nome": "Frango com catupiry · 8 fatias",
+          "desc": "Frango desfiado temperado, catupiry cremoso e orégano.",
+          "preco": 45,
+          "imagem": "assets/lanches/pizza-frango.jpg",
+          "imagemAlt": "Imagem ilustrativa de Frango com catupiry · 8 fatias"
+        },
+        {
+          "id": "pizza-calabresa-8",
+          "nome": "Calabresa · 8 fatias",
+          "desc": "Calabresa fatiada, cebola e orégano.",
+          "preco": 40,
+          "imagem": "assets/lanches/pizza-calabresa.jpg",
+          "imagemAlt": "Imagem ilustrativa de Calabresa · 8 fatias"
+        },
+        {
+          "id": "pizza-portuguesa-8",
+          "nome": "Portuguesa · 8 fatias",
+          "desc": "Presunto, ovos, cebola, pimentão, azeitonas e orégano.",
+          "preco": 45,
+          "imagem": "assets/lanches/pizza-portuguesa.jpg",
+          "imagemAlt": "Imagem ilustrativa de Portuguesa · 8 fatias"
+        },
+        {
+          "id": "pizza-costela-8",
+          "nome": "Costela desfiada com cream cheese · 8 fatias",
+          "desc": "Costela desfiada com cream cheese.",
+          "preco": 50,
+          "imagem": "assets/lanches/pizza-costela.jpg",
+          "imagemAlt": "Imagem ilustrativa de Costela desfiada com cream cheese · 8 fatias"
+        },
+        {
+          "id": "pizza-carne-sol-8",
+          "nome": "Carne de sol com cream cheese · 8 fatias",
+          "desc": "Carne de sol desfiada, cream cheese e orégano.",
+          "preco": 50,
+          "imagem": "assets/lanches/pizza-carne-sol.jpg",
+          "imagemAlt": "Imagem ilustrativa de Carne de sol com cream cheese · 8 fatias"
+        },
+        {
+          "id": "pizza-mucarela-8",
+          "nome": "Muçarela · 8 fatias",
+          "desc": "Muçarela, molho de tomate e orégano.",
+          "preco": 40,
+          "imagem": "assets/lanches/pizza-mucarela.jpg",
+          "imagemAlt": "Imagem ilustrativa de Muçarela · 8 fatias"
+        },
+        {
+          "id": "pizza-bacon-8",
+          "nome": "Bacon · 8 fatias",
+          "desc": "Fatias de bacon crocante.",
+          "preco": 50,
+          "imagem": "assets/lanches/pizza-bacon.jpg",
+          "imagemAlt": "Imagem ilustrativa de Bacon · 8 fatias"
+        },
+        {
+          "id": "pizza-frango-6",
+          "nome": "Frango com catupiry · 6 fatias",
+          "desc": "Frango desfiado temperado, catupiry cremoso e orégano.",
+          "preco": 33,
+          "imagem": "assets/lanches/pizza-frango.jpg",
+          "imagemAlt": "Imagem ilustrativa de Frango com catupiry · 6 fatias"
+        },
+        {
+          "id": "pizza-calabresa-6",
+          "nome": "Calabresa · 6 fatias",
+          "desc": "Calabresa fatiada, cebola e orégano.",
+          "preco": 31,
+          "imagem": "assets/lanches/pizza-calabresa.jpg",
+          "imagemAlt": "Imagem ilustrativa de Calabresa · 6 fatias"
+        },
+        {
+          "id": "pizza-portuguesa-6",
+          "nome": "Portuguesa · 6 fatias",
+          "desc": "Presunto, ovos, cebola, pimentão, azeitonas e orégano.",
+          "preco": 33,
+          "imagem": "assets/lanches/pizza-portuguesa.jpg",
+          "imagemAlt": "Imagem ilustrativa de Portuguesa · 6 fatias"
+        },
+        {
+          "id": "pizza-costela-6",
+          "nome": "Costela desfiada com cream cheese · 6 fatias",
+          "desc": "Costela desfiada com cream cheese.",
+          "preco": 38,
+          "imagem": "assets/lanches/pizza-costela.jpg",
+          "imagemAlt": "Imagem ilustrativa de Costela desfiada com cream cheese · 6 fatias"
+        },
+        {
+          "id": "pizza-carne-sol-6",
+          "nome": "Carne de sol com cream cheese · 6 fatias",
+          "desc": "Carne de sol desfiada, cream cheese e orégano.",
+          "preco": 38,
+          "imagem": "assets/lanches/pizza-carne-sol.jpg",
+          "imagemAlt": "Imagem ilustrativa de Carne de sol com cream cheese · 6 fatias"
+        },
+        {
+          "id": "pizza-mucarela-6",
+          "nome": "Muçarela · 6 fatias",
+          "desc": "Muçarela, molho de tomate e orégano.",
+          "preco": 31,
+          "imagem": "assets/lanches/pizza-mucarela.jpg",
+          "imagemAlt": "Imagem ilustrativa de Muçarela · 6 fatias"
+        },
+        {
+          "id": "pizza-bacon-6",
+          "nome": "Bacon · 6 fatias",
+          "desc": "Fatias de bacon crocante.",
+          "preco": 38,
+          "imagem": "assets/lanches/pizza-bacon.jpg",
+          "imagemAlt": "Imagem ilustrativa de Bacon · 6 fatias"
+        }
+      ]
+    },
+    {
+      "id": "pasteis",
+      "nome": "Pastéis",
+      "itens": [
+        {
+          "id": "pastel-carne-queijo",
+          "nome": "Pastel de carne com queijo",
+          "desc": "Recheio de carne com queijo.",
+          "preco": 9.99,
+          "imagem": "assets/lanches/pastel.jpg",
+          "imagemAlt": "Imagem ilustrativa de Pastel de carne com queijo"
+        },
+        {
+          "id": "pastel-frango-queijo",
+          "nome": "Pastel de frango com queijo",
+          "desc": "Recheio de frango com queijo.",
+          "preco": 9.99,
+          "imagem": "assets/lanches/pastel.jpg",
+          "imagemAlt": "Imagem ilustrativa de Pastel de frango com queijo"
+        },
+        {
+          "id": "pastel-pizza",
+          "nome": "Pastel de pizza",
+          "desc": "Sabor pizza.",
+          "preco": 9.99,
+          "imagem": "assets/lanches/pastel.jpg",
+          "imagemAlt": "Imagem ilustrativa de Pastel de pizza"
+        },
+        {
+          "id": "pastel-queijo",
+          "nome": "Pastel de queijo",
+          "desc": "Recheio de queijo.",
+          "preco": 9.99,
+          "imagem": "assets/lanches/pastel.jpg",
+          "imagemAlt": "Imagem ilustrativa de Pastel de queijo"
+        },
+        {
+          "id": "pastel-calabresa",
+          "nome": "Pastel de calabresa",
+          "desc": "Recheio de calabresa.",
+          "preco": 9.99,
+          "imagem": "assets/lanches/pastel.jpg",
+          "imagemAlt": "Imagem ilustrativa de Pastel de calabresa"
+        },
+        {
+          "id": "pastel-calabresa-queijo",
+          "nome": "Pastel de calabresa com queijo",
+          "desc": "Recheio de calabresa com queijo.",
+          "preco": 9.99,
+          "imagem": "assets/lanches/pastel.jpg",
+          "imagemAlt": "Imagem ilustrativa de Pastel de calabresa com queijo"
+        }
+      ]
+    },
+    {
+      "id": "coxinhas",
+      "nome": "Coxinha",
+      "itens": [
+        {
+          "id": "coxinha-frango",
+          "nome": "Coxinha de frango",
+          "desc": "Recheio de frango.",
+          "preco": 6.5,
+          "imagem": "assets/lanches/coxinha.jpg",
+          "imagemAlt": "Imagem ilustrativa de Coxinha de frango"
+        }
+      ]
+    },
+    {
+      "id": "batatas",
+      "nome": "Batatas",
+      "itens": [
+        {
+          "id": "batata-150",
+          "nome": "Batata · 150 g",
+          "desc": "Porção de batata frita.",
+          "preco": 8,
+          "imagem": "assets/lanches/batata.jpg",
+          "imagemAlt": "Imagem ilustrativa de Batata · 150 g"
+        },
+        {
+          "id": "batata-200",
+          "nome": "Batata · 200 g",
+          "desc": "Porção de batata frita.",
+          "preco": 10,
+          "imagem": "assets/lanches/batata.jpg",
+          "imagemAlt": "Imagem ilustrativa de Batata · 200 g"
+        },
+        {
+          "id": "batata-200-calabresa",
+          "nome": "Batata com calabresa · 200 g",
+          "desc": "Batata frita com calabresa.",
+          "preco": 14,
+          "imagem": "assets/lanches/batata-calabresa.jpg",
+          "imagemAlt": "Imagem ilustrativa de Batata com calabresa · 200 g"
+        },
+        {
+          "id": "batata-300",
+          "nome": "Batata · 300 g",
+          "desc": "Porção de batata frita.",
+          "preco": 15,
+          "imagem": "assets/lanches/batata.jpg",
+          "imagemAlt": "Imagem ilustrativa de Batata · 300 g"
+        },
+        {
+          "id": "batata-300-calabresa",
+          "nome": "Batata com calabresa · 300 g",
+          "desc": "Batata frita com calabresa.",
+          "preco": 17,
+          "imagem": "assets/lanches/batata-calabresa.jpg",
+          "imagemAlt": "Imagem ilustrativa de Batata com calabresa · 300 g"
+        },
+        {
+          "id": "batata-300-cheddar-bacon",
+          "nome": "Batata com cheddar e bacon · 300 g",
+          "desc": "Batata frita com cheddar e bacon.",
+          "preco": 18,
+          "imagem": "assets/lanches/batata-cheddar-bacon.jpg",
+          "imagemAlt": "Imagem ilustrativa de Batata com cheddar e bacon · 300 g"
+        },
+        {
+          "id": "batata-400",
+          "nome": "Batata · 400 g",
+          "desc": "Porção de batata frita.",
+          "preco": 18,
+          "imagem": "assets/lanches/batata.jpg",
+          "imagemAlt": "Imagem ilustrativa de Batata · 400 g"
+        },
+        {
+          "id": "batata-400-calabresa",
+          "nome": "Batata com calabresa · 400 g",
+          "desc": "Batata frita com calabresa.",
+          "preco": 22,
+          "imagem": "assets/lanches/batata-calabresa.jpg",
+          "imagemAlt": "Imagem ilustrativa de Batata com calabresa · 400 g"
+        },
+        {
+          "id": "batata-400-cheddar-bacon",
+          "nome": "Batata com cheddar e bacon · 400 g",
+          "desc": "Batata frita com cheddar e bacon.",
+          "preco": 24,
+          "imagem": "assets/lanches/batata-cheddar-bacon.jpg",
+          "imagemAlt": "Imagem ilustrativa de Batata com cheddar e bacon · 400 g"
+        },
+        {
+          "id": "batata-400-costela",
+          "nome": "Batata com costela e cream cheese · 400 g",
+          "desc": "Batata frita com costela desfiada e cream cheese.",
+          "preco": 30,
+          "imagem": "assets/lanches/batata-costela.jpg",
+          "imagemAlt": "Imagem ilustrativa de Batata com costela e cream cheese · 400 g"
+        }
+      ]
+    },
+    {
+      "id": "bebidas",
+      "nome": "Bebidas",
+      "itens": [
+        {
+          "id": "beb-cajuina-1l",
+          "nome": "Cajuína · 1 L",
+          "desc": "Cajuína.",
+          "preco": 10,
+          "imagem": "assets/lanches/beb-cajuina-1l.jpg",
+          "imagemAlt": "Imagem ilustrativa de Cajuína · 1 L"
+        },
+        {
+          "id": "beb-cajuina-350",
+          "nome": "Cajuína · 350 ml",
+          "desc": "Cajuína.",
+          "preco": 6,
+          "imagem": "assets/lanches/beb-cajuina-350-lata.jpg",
+          "imagemAlt": "Cajuína São Geraldo em lata de 350 ml"
+        },
+        {
+          "id": "beb-guarana-1l",
+          "nome": "Guaraná · 1 L",
+          "desc": "Refrigerante guaraná.",
+          "preco": 8,
+          "imagem": "assets/lanches/beb-guarana-1l.jpg",
+          "imagemAlt": "Imagem ilustrativa de Guaraná · 1 L"
+        },
+        {
+          "id": "beb-guarana-200",
+          "nome": "Guaraná · 200 ml",
+          "desc": "Refrigerante guaraná.",
+          "preco": 3,
+          "imagem": "assets/lanches/beb-guarana-200.jpg",
+          "imagemAlt": "Imagem ilustrativa de Guaraná · 200 ml"
+        },
+        {
+          "id": "beb-guarana-350",
+          "nome": "Guaraná · 350 ml",
+          "desc": "Refrigerante guaraná.",
+          "preco": 5,
+          "imagem": "assets/lanches/beb-guarana-350.jpg",
+          "imagemAlt": "Imagem ilustrativa de Guaraná · 350 ml"
+        },
+        {
+          "id": "beb-pepsi-1l",
+          "nome": "Pepsi · 1 L",
+          "desc": "Refrigerante Pepsi.",
+          "preco": 8,
+          "imagem": "assets/lanches/beb-pepsi-1l.jpg",
+          "imagemAlt": "Imagem ilustrativa de Pepsi · 1 L"
+        },
+        {
+          "id": "beb-pepsi-200",
+          "nome": "Pepsi · 200 ml",
+          "desc": "Refrigerante Pepsi.",
+          "preco": 3,
+          "imagem": "assets/lanches/beb-pepsi-200.jpg",
+          "imagemAlt": "Imagem ilustrativa de Pepsi · 200 ml"
+        },
+        {
+          "id": "beb-sukita-200",
+          "nome": "Sukita · 200 ml",
+          "desc": "Refrigerante Sukita.",
+          "preco": 3,
+          "imagem": "assets/lanches/beb-sukita-200.jpg",
+          "imagemAlt": "Imagem ilustrativa de Sukita · 200 ml"
+        },
+        {
+          "id": "beb-fanta",
+          "nome": "Fanta · lata 350 ml",
+          "desc": "Refrigerante Fanta. Lata de 350 ml.",
+          "preco": 6,
+          "imagem": "assets/lanches/beb-fanta.jpg",
+          "imagemAlt": "Imagem ilustrativa de Fanta · lata 350 ml"
+        },
+        {
+          "id": "beb-coca",
+          "nome": "Coca-Cola · lata 350 ml",
+          "desc": "Refrigerante Coca-Cola. Lata de 350 ml.",
+          "preco": 10,
+          "imagem": "assets/lanches/beb-coca.jpg",
+          "imagemAlt": "Imagem ilustrativa de Coca-Cola · lata 350 ml"
+        },
+        {
+          "id": "beb-sprite",
+          "nome": "Sprite · lata 350 ml",
+          "desc": "Refrigerante Sprite. Lata de 350 ml.",
+          "preco": 6,
+          "imagem": "assets/lanches/beb-sprite.jpg",
+          "imagemAlt": "Imagem ilustrativa de Sprite · lata 350 ml"
+        },
+        {
+          "id": "beb-skinka",
+          "nome": "Skinka · lata 350 ml",
+          "desc": "Bebida Skinka. Lata de 350 ml.",
+          "preco": 5,
+          "imagem": "assets/lanches/beb-skinka.jpg",
+          "imagemAlt": "Imagem ilustrativa de Skinka · lata 350 ml"
+        },
+        {
+          "id": "beb-agua",
+          "nome": "Água mineral",
+          "desc": "Água mineral.",
+          "preco": 2,
+          "imagem": "assets/lanches/beb-agua.jpg",
+          "imagemAlt": "Imagem ilustrativa de Água mineral"
+        },
+        {
+          "id": "beb-suco-polpa",
+          "nome": "Suco da polpa",
+          "desc": "Suco de polpa. Consulte os sabores disponíveis.",
+          "preco": 6,
+          "imagem": "assets/lanches/beb-suco-polpa.jpg",
+          "imagemAlt": "Imagem ilustrativa de Suco da polpa"
+        }
+      ]
+    },
+    {
+      "id": "adicionais",
+      "nome": "Adicionais",
+      "itens": [
+        {
+          "id": "extra-cream-cheese",
+          "nome": "Cream cheese extra",
+          "desc": "Adicional para hambúrguer artesanal. Informe nas observações em qual lanche deseja o adicional.",
+          "preco": 3,
+          "imagem": "assets/lanches/cream-cheese.jpg",
+          "imagemAlt": "Imagem ilustrativa de Cream cheese extra"
+        }
+      ]
+    }
+  ],
+  "avaliacao": {
+    "autor": "Geovane Alves de Oliveira",
+    "nota": 5,
+    "quando": "Há 3 semanas",
+    "tipoPedido": "Entrega",
+    "tipoRefeicao": "Outro",
+    "espera": "De 10 a 30 min",
+    "criancas": "Sim"
+  },
+  "catalogSource": {
+    "type": "fotos-do-cardapio",
+    "date": "2026-10-23"
+  }
+}

@@ -1,0 +1,100 @@
+[
+  {
+    "id": "pizza-calabresa",
+    "source": "https://carmelapizzeria.com.br/our-menu",
+    "url": "https://carmelapizzeria.com.br/assets/calabresa-COSrT-Lj.jpg",
+    "illustrative": true,
+    "file": "pizza-calabresa.jpg"
+  },
+  {
+    "id": "pizza-frango",
+    "source": "https://www.cajumangaba.com.br/post/pizza-de-frango-com-catupiry",
+    "url": "https://static.wixstatic.com/media/bd705b_527fa06c1fef4361880df1cc4c5929d1~mv2.jpg/v1/fill/w_1000%2Ch_773%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01/bd705b_527fa06c1fef4361880df1cc4c5929d1~mv2.jpg",
+    "illustrative": true,
+    "file": "pizza-frango.jpg"
+  },
+  {
+    "id": "pizza-portuguesa",
+    "source": "https://pizzariaipiranga.com.br/cardapio/pizza-portuguesa-ipiranga-sp/",
+    "url": "https://pizzariaipiranga.com.br/wp-content/uploads/2024/03/Pizza-Portuguesa-Tutti-Pizza-Pizzaria-no-Ipiranga-SP.jpg",
+    "illustrative": true,
+    "file": "pizza-portuguesa.jpg"
+  },
+  {
+    "id": "pizza-costela",
+    "source": "https://taroba.com.br/entretenimento/gastronomia/pizza-gourmet-de-costela-com-cream-chesse-mYPxg.html",
+    "url": "https://taroba.com.br/api/images/proxy?src=https%3A%2F%2Fwww.netdeal.com.br%2Fapi%2Fimages%2Fproducao.spayce.com.br%2F1654193561324_lg_1d00e3e6_3ec4_42e8_8ce4_c64122b0215b.jpeg",
+    "illustrative": true,
+    "file": "pizza-costela.jpg"
+  },
+  {
+    "id": "pizza-carne-sol",
+    "source": "https://www.marmitafitness.com.br/pizza-carne-de-sol-com-cream-cheese-low-carb-p229",
+    "url": "https://cdn.iset.io/assets/74120/produtos/229/pizza-carne-de-sol-com-cream-cheese-low-carb-marmita-fitness-1.jpg",
+    "illustrative": true,
+    "file": "pizza-carne-sol.jpg"
+  },
+  {
+    "id": "pizza-mucarela",
+    "source": "https://www.commendo.com.br/10267/torrelaguna-pizzaria",
+    "url": "https://www.commendo.com.br/public/images/galeria/tr110267.jpg",
+    "illustrative": true,
+    "file": "pizza-mucarela.jpg"
+  },
+  {
+    "id": "pizza-bacon",
+    "source": "https://falatozz.hu/rendeles/Biatorbagy/Pizza-Della-Mamma/",
+    "url": "https://storage.api.falatozz.hu/images/cc/9a/00/00/carneo-pizza_600x600.png",
+    "illustrative": true,
+    "file": "pizza-bacon.jpg"
+  },
+  {
+    "id": "pastel",
+    "source": "https://paranaibamais.com.br/receitas/aprenda-a-fazer-pastel/",
+    "url": "https://paranaibamais.com.br/wp-content/uploads/2024/10/receita-pastel.png",
+    "illustrative": true,
+    "file": "pastel.jpg"
+  },
+  {
+    "id": "coxinha",
+    "source": "https://entretenimento.r7.com/receitas/receitas-de-pesos/descubra-a-receita-perfeita-para-coxinhas-de-frango-25022024/",
+    "url": "https://newr7-r7-prod.web.arc-cdn.net/resizer/v2/J3DMTSMSVVN77DQQO2JIATOHPU.jpg?auth=bd523a36b8d23958edb9e2d5a4d57e9cde5a2eaf53122e93152f9ee4b91ebf18&height=667&width=1000",
+    "illustrative": true,
+    "file": "coxinha.jpg"
+  },
+  {
+    "id": "batata-cheddar-bacon",
+    "source": "https://assimeassados.appsimpliza.com.br/",
+    "url": "https://appsimpliza.com.br/modelSitePedidos/imagens/339a1096d23871dad46742f9ce8ffec0-Batata%20Cheddar%20e%20Bacon.JPG",
+    "illustrative": true,
+    "file": "batata-cheddar-bacon.jpg"
+  },
+  {
+    "id": "batata-calabresa",
+    "source": "https://espaconatelie.com.br/12-petiscos-de-boteco-para-animar-seu-fim-de-semana/",
+    "url": "https://espaconatelie.com.br/wp-content/uploads/2024/02/batata-frita-com-calabresa-1068x1068.jpg",
+    "illustrative": true,
+    "file": "batata-calabresa.jpg"
+  },
+  {
+    "id": "batata-costela",
+    "source": "https://bacanaburger.multiappbrasil.tec.br/produto/5443",
+    "url": "https://bacanaburger.multiappbrasil.tec.br/_core/_uploads/123/2024/04/170303042403cch8kjcb_thumb.jpeg",
+    "illustrative": true,
+    "file": "batata-costela.jpg"
+  },
+  {
+    "id": "cream-cheese",
+    "source": "https://www.cooknenjoy.com/cream-cheese",
+    "url": "https://images.cooknenjoy.com/uploads/2023/05/Cream-Cheese-Site.jpg",
+    "illustrative": true,
+    "file": "cream-cheese.jpg"
+  },
+  {
+    "id": "batata",
+    "source": "https://www.pinterest.com/pin/744079169677629824/",
+    "url": "https://i.pinimg.com/736x/9b/f6/35/9bf63565986eceae284be84a8328b986.jpg",
+    "illustrative": true,
+    "file": "batata.jpg"
+  }
+]

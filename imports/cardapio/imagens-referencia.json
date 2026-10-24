@@ -1,0 +1,107 @@
+[
+  {
+    "id": "supremo",
+    "url": "https://cdn.aquipede.com/45371735000160/product-15.webp",
+    "source": "https://aidelivery.com.br/crashburger",
+    "illustrative": true,
+    "file": "supremo.webp"
+  },
+  {
+    "id": "costela-cream",
+    "url": "https://img0.didiglobal.com/static/soda_public/img_c6e32dc2ac9f7b72aa517badd53f70dd.jpg",
+    "source": "https://99app.com/99food/curitiba/burguer-planet-hamburgueria/5764608439268148569/",
+    "illustrative": true,
+    "file": "costela-cream.jpg"
+  },
+  {
+    "id": "costela-geleia",
+    "url": "https://deufome.app/img/products/1695792602.jpg",
+    "source": "https://deufome.app/donsburger/page-product-details.php?id=6",
+    "illustrative": true,
+    "file": "costela-geleia.jpg"
+  },
+  {
+    "id": "tropical",
+    "url": "https://jehancancook.com/wp-content/uploads/2021/07/Instagram-and-Facebook-2.jpg",
+    "source": "https://jehancancook.com/2021/07/pineapple-bbq-burger/",
+    "illustrative": true,
+    "file": "tropical.jpg"
+  },
+  {
+    "id": "nutella",
+    "url": "https://images.deliveryhero.io/image/talabat/MenuItems/Nutella_Cheese_Burger638960277706443920.jpg",
+    "source": "https://www.talabat.com/uae/restaurant/721065/three-cuts-eats-jumeirah-village-circle?aid=1310",
+    "illustrative": true,
+    "file": "nutella.jpg"
+  },
+  {
+    "id": "bacon",
+    "url": "https://static.spotapps.co/spots/a0/49d832085c4e06b39d0e5b55f366d8/full",
+    "source": "https://sackssandwiches.com/phoenix-sacks-sandwiches-our-menus",
+    "illustrative": true,
+    "file": "bacon.jpg"
+  },
+  {
+    "id": "classico",
+    "url": "https://images.squarespace-cdn.com/content/v1/6074c8b9fbc2a82002fa7ad2/1618962390465-R4E9EJE243DRHOBXG4XJ/Pound%2BOriginal.jpg",
+    "source": "https://www.pound.mx/burgers",
+    "illustrative": true,
+    "file": "classico.webp"
+  },
+  {
+    "id": "big-gigante",
+    "url": "https://images.rappi.com/products/2090183197-1545412826.png",
+    "source": "https://www.rappi.com.co/restaurantes/900035307-teddys",
+    "illustrative": true,
+    "file": "big-gigante.jpg"
+  },
+  {
+    "id": "big-burguer",
+    "url": "https://cdn.cooki.net.br/fotos/mc-x-tudo--carne-dupla--cheddar-54a4e603-fa1d-47bc-ae9a-bc3eccf72ca9.jpeg",
+    "source": "https://mcronald.com.br/",
+    "illustrative": true,
+    "file": "big-burguer.jpg"
+  },
+  {
+    "id": "preferido",
+    "url": "https://takeat-imgs.takeat.app/2472f1991e5599be2b154018942f22de.webp",
+    "source": "https://pedido.takeat.app/megalanchehamburgueria",
+    "illustrative": true,
+    "file": "preferido.webp"
+  },
+  {
+    "id": "x-bacon",
+    "url": "https://static.spotapps.co/spots/a0/49d832085c4e06b39d0e5b55f366d8/full",
+    "source": "https://sackssandwiches.com/phoenix-sacks-sandwiches-our-menus",
+    "illustrative": true,
+    "file": "x-bacon.jpg"
+  },
+  {
+    "id": "x-calabresa",
+    "url": "https://s3-sa-east-1.amazonaws.com/deliveryon-uploads/products/espetinhodosbaroes/68_66623c16e6644.jpg",
+    "source": "https://espetinhodosbaroes.deliveryon.com.br/produtos/ver/68",
+    "illustrative": true,
+    "file": "x-calabresa.jpg"
+  },
+  {
+    "id": "dupla-carne",
+    "url": "https://assets.dev-filo.dift.io/img/2023/05/28/unionganadera1269706.jpg",
+    "source": "https://www.filo.news/noticia/2023/05/28/dia-de-la-hamburguesa-las-que-se-venden-a-usd1-promos-especiales-y-festivales",
+    "illustrative": true,
+    "file": "dupla-carne.webp"
+  },
+  {
+    "id": "egg-burguer",
+    "url": "https://img0.didiglobal.com/static/soda_public/do1_ZJC7pwRyv9Un9R4ZSPbJ",
+    "source": "https://web.didiglobal.com/pe/food/lima/salchipapas-sindicales-surquillo/5764607707504707377/",
+    "illustrative": true,
+    "file": "egg-burguer.jpg"
+  },
+  {
+    "id": "x-burguer",
+    "url": "https://www.cidadeoferta.com.br/storage/offers/1278-garage-43-burgers-londrina-opala-salad-imagem-6.jpg",
+    "source": "https://www.cidadeoferta.com.br/oferta/garage-43-burgers-londrina-opala-salad-com-hamburguer-artesanal-queijo-cheddar-alface-americana-e-tomate-fresco",
+    "illustrative": true,
+    "file": "x-burguer.jpg"
+  }
+]
