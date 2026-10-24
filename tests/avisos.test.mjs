@@ -14,9 +14,9 @@ test('avisos: um som e uma notificação por pedido novo, sem repetir no polling
     window.MDLAlerts.armSound();return window.MDLAlerts;
   }
   const a=tab(),b=tab(),old={id:'old',code:'OLD',status:'novo'},fresh={id:'new',code:'NEW',status:'novo'};
-  a.ingest([old]);b.ingest([old]);assert.equal(tones,12);assert.equal(notifications.length,1);
+  a.ingest([old]);b.ingest([old]);assert.equal(tones,32);assert.equal(notifications.length,1);
   a.ingest([fresh,old]);a.ingest([fresh,old]);b.ingest([fresh,old]);
-  assert.equal(tones,24);assert.equal(notifications.length,2);assert.equal(notifications[1].tag,'pedido-new');
+  assert.equal(tones,64);assert.equal(notifications.length,2);assert.equal(notifications[1].tag,'pedido-new');
 });
 
 test('avisos: pedido recebido antes de ativar aparece e notifica após permitir acesso',async()=>{
