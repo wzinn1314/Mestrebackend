@@ -96,5 +96,15 @@
     "source": "https://food.bolt.eu/en/437-porto/p/165768-suco-bagaco/",
     "illustrative": true,
     "file": "beb-suco-polpa.jpg"
+  },
+  {
+    "id": "beb-coca-1l",
+    "source": "https://loja.supernovaera.com.br/refrigerante-em-65640/p",
+    "file": "beb-coca-1l.jpg"
+  },
+  {
+    "id": "beb-coca-zero-1l",
+    "source": "https://www.farmais.com.br/garrafa-refrigerante-coca-cola-zero-1l-39101/p",
+    "file": "beb-coca-zero-1l.jpg"
   }
 ]

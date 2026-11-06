@@ -599,8 +599,16 @@
           "nome": "Coca-Cola · 1 L",
           "desc": "Refrigerante Coca-Cola. Garrafa de 1 litro.",
           "preco": 12,
-          "imagem": "assets/lanches/beb-coca.jpg",
-          "imagemAlt": "Imagem ilustrativa de Coca-Cola"
+          "imagem": "assets/lanches/beb-coca-1l.jpg",
+          "imagemAlt": "Garrafa de Coca-Cola Original de 1 litro"
+        },
+        {
+          "id": "beb-coca-zero-1l",
+          "nome": "Coca-Cola Zero · 1 L",
+          "desc": "Refrigerante Coca-Cola Zero Açúcar. Garrafa de 1 litro.",
+          "preco": 12,
+          "imagem": "assets/lanches/beb-coca-zero-1l.jpg",
+          "imagemAlt": "Garrafa de Coca-Cola Zero Açúcar de 1 litro"
         },
         {
           "id": "beb-sprite",
