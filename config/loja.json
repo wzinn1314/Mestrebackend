@@ -588,11 +588,19 @@
         },
         {
           "id": "beb-coca",
-          "nome": "Coca-Cola · 400 ml",
-          "desc": "Porção de 400 ml. Imagem ilustrativa.",
-          "preco": 8,
+          "nome": "Coca-Cola · lata 350 ml",
+          "desc": "Refrigerante Coca-Cola. Lata de 350 ml.",
+          "preco": 10,
           "imagem": "assets/lanches/beb-coca.jpg",
-          "imagemAlt": "Imagem ilustrativa de Coca-Cola · 400 ml"
+          "imagemAlt": "Imagem ilustrativa de Coca-Cola · lata 350 ml"
+        },
+        {
+          "id": "beb-coca-1l",
+          "nome": "Coca-Cola · 1 L",
+          "desc": "Refrigerante Coca-Cola. Garrafa de 1 litro.",
+          "preco": 12,
+          "imagem": "assets/lanches/beb-coca.jpg",
+          "imagemAlt": "Imagem ilustrativa de Coca-Cola"
         },
         {
           "id": "beb-sprite",
