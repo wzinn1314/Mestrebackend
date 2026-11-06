@@ -45,8 +45,8 @@ export async function createApp({database,publicOrigin,adminPassword,now,store:p
       const body=async()=>{
         if (!(req.headers['content-type']||'').startsWith('application/json')) bad('Envie os dados em JSON.',415);
         const chunks=[];let length=0;
-        if(req.body!==undefined){const encoded=Buffer.isBuffer(req.body)?req.body:Buffer.from(typeof req.body==='string'?req.body:JSON.stringify(req.body));if(encoded.length>32768)bad('Pedido muito grande.',413);chunks.push(encoded);}
-        else for await (const chunk of req) { length+=chunk.length;if(length>32768)bad('Pedido muito grande.',413);chunks.push(chunk); }
+        if(req.body!==undefined){const encoded=Buffer.isBuffer(req.body)?req.body:Buffer.from(typeof req.body==='string'?req.body:JSON.stringify(req.body));if(encoded.length>(url.pathname.startsWith('/api/admin/products')?500000:32768))bad('Pedido muito grande.',413);chunks.push(encoded);}
+        else for await (const chunk of req) { length+=chunk.length;if(length>(url.pathname.startsWith('/api/admin/products')?500000:32768))bad('Pedido muito grande.',413);chunks.push(chunk); }
         try { const result=JSON.parse(Buffer.concat(chunks).toString());if(!result || typeof result!=='object' || Array.isArray(result))bad('Dados inválidos.');return result; }
         catch(error) {if(error.status)throw error;bad('Dados inválidos.');}
       };

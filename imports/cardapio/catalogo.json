@@ -467,115 +467,188 @@
       "itens": [
         {
           "id": "beb-cajuina-1l",
-          "nome": "Cajuína · 1 L",
-          "desc": "Cajuína.",
-          "preco": 10,
+          "nome": "Cajuína · 400 ml",
+          "desc": "Porção de 400 ml. Imagem ilustrativa.",
+          "preco": 8,
           "imagem": "assets/lanches/beb-cajuina-1l.jpg",
-          "imagemAlt": "Imagem ilustrativa de Cajuína · 1 L"
+          "imagemAlt": "Imagem ilustrativa de Cajuína · 400 ml"
         },
         {
           "id": "beb-cajuina-350",
-          "nome": "Cajuína · 350 ml",
-          "desc": "Cajuína.",
-          "preco": 6,
+          "nome": "Cajuína · 400 ml",
+          "desc": "Porção de 400 ml. Imagem ilustrativa.",
+          "preco": 8,
           "imagem": "assets/lanches/beb-cajuina-350-lata.jpg",
-          "imagemAlt": "Cajuína São Geraldo em lata de 350 ml"
+          "imagemAlt": "Imagem ilustrativa de Cajuína · 400 ml"
         },
         {
           "id": "beb-guarana-1l",
-          "nome": "Guaraná · 1 L",
-          "desc": "Refrigerante guaraná.",
+          "nome": "Guaraná · 400 ml",
+          "desc": "Porção de 400 ml. Imagem ilustrativa.",
           "preco": 8,
           "imagem": "assets/lanches/beb-guarana-1l.jpg",
-          "imagemAlt": "Imagem ilustrativa de Guaraná · 1 L"
+          "imagemAlt": "Imagem ilustrativa de Guaraná · 400 ml"
         },
         {
           "id": "beb-guarana-200",
-          "nome": "Guaraná · 200 ml",
-          "desc": "Refrigerante guaraná.",
-          "preco": 3,
+          "nome": "Guaraná · 400 ml",
+          "desc": "Porção de 400 ml. Imagem ilustrativa.",
+          "preco": 8,
           "imagem": "assets/lanches/beb-guarana-200.jpg",
-          "imagemAlt": "Imagem ilustrativa de Guaraná · 200 ml"
+          "imagemAlt": "Imagem ilustrativa de Guaraná · 400 ml"
         },
         {
           "id": "beb-guarana-350",
-          "nome": "Guaraná · 350 ml",
-          "desc": "Refrigerante guaraná.",
-          "preco": 5,
+          "nome": "Guaraná · 400 ml",
+          "desc": "Porção de 400 ml. Imagem ilustrativa.",
+          "preco": 8,
           "imagem": "assets/lanches/beb-guarana-350.jpg",
-          "imagemAlt": "Imagem ilustrativa de Guaraná · 350 ml"
+          "imagemAlt": "Imagem ilustrativa de Guaraná · 400 ml"
         },
         {
           "id": "beb-pepsi-1l",
-          "nome": "Pepsi · 1 L",
-          "desc": "Refrigerante Pepsi.",
+          "nome": "Pepsi · 400 ml",
+          "desc": "Porção de 400 ml. Imagem ilustrativa.",
           "preco": 8,
           "imagem": "assets/lanches/beb-pepsi-1l.jpg",
-          "imagemAlt": "Imagem ilustrativa de Pepsi · 1 L"
+          "imagemAlt": "Imagem ilustrativa de Pepsi · 400 ml"
         },
         {
           "id": "beb-pepsi-200",
-          "nome": "Pepsi · 200 ml",
-          "desc": "Refrigerante Pepsi.",
-          "preco": 3,
+          "nome": "Pepsi · 400 ml",
+          "desc": "Porção de 400 ml. Imagem ilustrativa.",
+          "preco": 8,
           "imagem": "assets/lanches/beb-pepsi-200.jpg",
-          "imagemAlt": "Imagem ilustrativa de Pepsi · 200 ml"
+          "imagemAlt": "Imagem ilustrativa de Pepsi · 400 ml"
         },
         {
           "id": "beb-sukita-200",
-          "nome": "Sukita · 200 ml",
-          "desc": "Refrigerante Sukita.",
-          "preco": 3,
+          "nome": "Sukita · 400 ml",
+          "desc": "Porção de 400 ml. Imagem ilustrativa.",
+          "preco": 8,
           "imagem": "assets/lanches/beb-sukita-200.jpg",
-          "imagemAlt": "Imagem ilustrativa de Sukita · 200 ml"
+          "imagemAlt": "Imagem ilustrativa de Sukita · 400 ml"
         },
         {
           "id": "beb-fanta",
-          "nome": "Fanta · lata 350 ml",
-          "desc": "Refrigerante Fanta. Lata de 350 ml.",
-          "preco": 6,
+          "nome": "Fanta · 400 ml",
+          "desc": "Porção de 400 ml. Imagem ilustrativa.",
+          "preco": 8,
           "imagem": "assets/lanches/beb-fanta.jpg",
-          "imagemAlt": "Imagem ilustrativa de Fanta · lata 350 ml"
+          "imagemAlt": "Imagem ilustrativa de Fanta · 400 ml"
         },
         {
           "id": "beb-coca",
-          "nome": "Coca-Cola · lata 350 ml",
-          "desc": "Refrigerante Coca-Cola. Lata de 350 ml.",
-          "preco": 10,
+          "nome": "Coca-Cola · 400 ml",
+          "desc": "Porção de 400 ml. Imagem ilustrativa.",
+          "preco": 8,
           "imagem": "assets/lanches/beb-coca.jpg",
-          "imagemAlt": "Imagem ilustrativa de Coca-Cola · lata 350 ml"
+          "imagemAlt": "Imagem ilustrativa de Coca-Cola · 400 ml"
         },
         {
           "id": "beb-sprite",
-          "nome": "Sprite · lata 350 ml",
-          "desc": "Refrigerante Sprite. Lata de 350 ml.",
-          "preco": 6,
+          "nome": "Sprite · 400 ml",
+          "desc": "Porção de 400 ml. Imagem ilustrativa.",
+          "preco": 8,
           "imagem": "assets/lanches/beb-sprite.jpg",
-          "imagemAlt": "Imagem ilustrativa de Sprite · lata 350 ml"
+          "imagemAlt": "Imagem ilustrativa de Sprite · 400 ml"
         },
         {
           "id": "beb-skinka",
-          "nome": "Skinka · lata 350 ml",
-          "desc": "Bebida Skinka. Lata de 350 ml.",
-          "preco": 5,
+          "nome": "Skinka · 400 ml",
+          "desc": "Porção de 400 ml. Imagem ilustrativa.",
+          "preco": 8,
           "imagem": "assets/lanches/beb-skinka.jpg",
-          "imagemAlt": "Imagem ilustrativa de Skinka · lata 350 ml"
+          "imagemAlt": "Imagem ilustrativa de Skinka · 400 ml"
         },
         {
           "id": "beb-agua",
-          "nome": "Água mineral",
-          "desc": "Água mineral.",
-          "preco": 2,
+          "nome": "Água · 400 ml",
+          "desc": "Porção de 400 ml. Imagem ilustrativa.",
+          "preco": 8,
           "imagem": "assets/lanches/beb-agua.jpg",
-          "imagemAlt": "Imagem ilustrativa de Água mineral"
+          "imagemAlt": "Imagem ilustrativa de Água · 400 ml"
         },
         {
-          "id": "beb-suco-polpa",
-          "nome": "Suco da polpa",
-          "desc": "Suco de polpa. Consulte os sabores disponíveis.",
-          "preco": 6,
+          "id": "beb-suco-acerola",
+          "nome": "Suco de Acerola · 400 ml",
+          "desc": "Suco da polpa de acerola. 400 ml.",
+          "preco": 8,
+          "ativo": true,
+          "imagem": "assets/lanches/beb-suco-acerola.jpg",
+          "imagemAlt": "Foto ilustrativa de suco de acerola com a fruta"
+        },
+        {
+          "id": "beb-suco-graviola",
+          "nome": "Suco de Graviola · 400 ml",
+          "desc": "Suco da polpa de graviola. 400 ml.",
+          "preco": 8,
+          "ativo": true,
+          "imagem": "assets/lanches/beb-suco-graviola.jpg",
+          "imagemAlt": "Foto ilustrativa de suco de graviola com a fruta"
+        },
+        {
+          "id": "beb-suco-caju",
+          "nome": "Suco de Caju · 400 ml",
+          "desc": "Suco da polpa de caju. 400 ml.",
+          "preco": 8,
+          "ativo": true,
+          "imagem": "assets/lanches/beb-suco-caju.jpg",
+          "imagemAlt": "Foto ilustrativa de suco de caju com a fruta"
+        },
+        {
+          "id": "beb-suco-caja",
+          "nome": "Suco de Cajá · 400 ml",
+          "desc": "Suco da polpa de cajá. 400 ml.",
+          "preco": 8,
+          "ativo": true,
+          "imagem": "assets/lanches/beb-suco-caja.jpg",
+          "imagemAlt": "Foto ilustrativa de suco de cajá com a fruta"
+        },
+        {
+          "id": "beb-suco-goiaba",
+          "nome": "Suco de Goiaba · 400 ml",
+          "desc": "Suco da polpa de goiaba. 400 ml.",
+          "preco": 8,
+          "ativo": true,
+          "imagem": "assets/lanches/beb-suco-goiaba.jpg",
+          "imagemAlt": "Foto ilustrativa de suco de goiaba com a fruta"
+        },
+        {
+          "id": "beb-suco-morango",
+          "nome": "Suco de Morango · 400 ml",
+          "desc": "Suco da polpa de morango. 400 ml.",
+          "preco": 8,
+          "ativo": true,
+          "imagem": "assets/lanches/beb-suco-morango.jpg",
+          "imagemAlt": "Foto ilustrativa de suco de morango com a fruta"
+        },
+        {
+          "id": "beb-suco-manga",
+          "nome": "Suco de Manga · 400 ml",
+          "desc": "Suco da polpa de manga. 400 ml.",
+          "preco": 8,
+          "ativo": true,
+          "imagem": "assets/lanches/beb-suco-manga.jpg",
+          "imagemAlt": "Foto ilustrativa de suco de manga com a fruta"
+        },
+        {
+          "id": "beb-suco-uva",
+          "nome": "Suco de Uva · 400 ml",
+          "desc": "Suco da polpa de uva. 400 ml.",
+          "preco": 8,
+          "ativo": true,
+          "imagem": "assets/lanches/beb-suco-uva.jpg",
+          "imagemAlt": "Foto ilustrativa de suco de uva com a fruta"
+        },
+        {
+          "id": "beb-suco-maracuja",
+          "nome": "Suco de Maracujá · 400 ml",
+          "desc": "Suco da polpa de maracujá. 400 ml.",
+          "preco": 8,
+          "ativo": false,
           "imagem": "assets/lanches/beb-suco-polpa.jpg",
-          "imagemAlt": "Imagem ilustrativa de Suco da polpa"
+          "imagemAlt": "Foto ilustrativa de suco da polpa"
         }
       ]
     },

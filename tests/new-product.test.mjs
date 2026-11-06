@@ -17,3 +17,15 @@ test('novo lanche: valida, persiste, permite editar e comprar depois de reinicia
   const order=store.placeOrder({customer:'Cliente teste',phone:'87999999999',fulfillment:'retirada',paymentMethod:'pix',items:[{id,qty:1}],expectedTotalCents:3600},randomUUID());assert.equal(order.totalCents,3600);
  }finally{store.close();await rm(dir,{recursive:true,force:true});}
 });
+
+test('foto do produto: salva, restaura e substitui sem perder disponibilidade',()=>{
+ const store=createStore(':memory:',seed);
+ const image='data:image/png;base64,aGVsbG8=';
+ try{
+ const {id}=store.createProduct({name:'Produto com foto',description:'Teste',category:'lanches',priceCents:800,active:true,image});
+ assert.equal(store.catalog().cardapio[0].itens[0].imagem,image);
+ assert.throws(()=>store.updateProduct(id,{priceCents:800,active:true,image:'javascript:alert(1)'}),{status:400});
+ store.updateProduct(id,{priceCents:800,active:false,image:'data:image/jpeg;base64,dGVzdA=='});
+ const item=store.catalog().cardapio[0].itens[0];assert.equal(item.imagem,'data:image/jpeg;base64,dGVzdA==');assert.equal(item.ativo,false);
+ }finally{store.close();}
+});

@@ -8,13 +8,35 @@ import { randomUUID } from 'node:crypto';
 import { createStore } from '../lib/store.mjs';
 const source=JSON.parse(await readFile(new URL('../imports/cardapio/catalogo.json',import.meta.url),'utf8'));
 
+test('atualizacao das bebidas preserva pedidos, historico, sessao e acompanhamento',async()=>{
+  const dir=await mkdtemp(path.join(tmpdir(),'mdl-safe-deploy-')),filename=path.join(dir,'test.sqlite');
+  let store=createStore(filename,source);
+  try{
+    store.setup('senha-de-teste-segura');
+    const session=store.login('senha-de-teste-segura');
+    store.updateSettings({deliveryFeeCents:0,minimumSubtotalCents:3000,acceptingOrders:true});
+    const order=store.placeOrder({customer:'Cliente Teste',phone:'87999999999',fulfillment:'retirada',paymentMethod:'pix',items:[{id:'art-supremo-150',qty:2}],expectedTotalCents:4580},randomUUID());
+    const before=store.order(order.id);store.close();
+    const db=new DatabaseSync(filename);
+    const snapshot=()=>JSON.stringify(['orders','history','admin','sessions'].map(table=>db.prepare('SELECT * FROM '+table).all()));
+    db.prepare('DELETE FROM settings WHERE key=?').run('drinks-400-v1');
+    const original=snapshot();
+    store=createStore(filename,source);
+    assert.equal(snapshot(),original);
+    assert.deepEqual(store.order(order.id),before);
+    assert.equal(store.authenticated(session),true);
+    assert.equal(store.catalog().cardapio.find(group=>group.id==='bebidas').itens.find(item=>item.id==='beb-suco-maracuja').ativo,false);
+    db.close();
+  }finally{store.close();await rm(dir,{recursive:true,force:true});}
+});
+
 test('cardápio das fotos: tamanhos, carnes e preços permanecem distintos',()=>{
   const items=source.cardapio.flatMap(group=>group.itens),map=new Map(items.map(item=>[item.id,item]));
-  assert.equal(items.length,71);assert.equal(map.size,71);assert.equal(source.cardapio.length,9);
+  assert.equal(items.length,79);assert.equal(map.size,79);assert.equal(source.cardapio.length,9);
   for(const [id,price] of [['art-supremo-150',22.9],['art-supremo-300',31.9],['art-costela-cream-150',26.9],['art-costela-cream-300',36.9],['pizza-calabresa-6',31],['pizza-calabresa-8',40],['trad-x-burguer',10],['pastel-carne-queijo',9.99],['coxinha-frango',6.5],['batata-400-costela',30],['extra-cream-cheese',3]])assert.equal(map.get(id).preco,price,id);
   assert.equal(source.cardapio.find(group=>group.id==='pasteis').itens.length,6);
   assert.equal(source.cardapio.find(group=>group.id==='combos').itens.length,3);
-  for(const name of ['Fanta','Coca-Cola','Sprite','Skinka'])assert(items.some(item=>item.nome===name+' · lata 350 ml'));
+  for(const name of ['Fanta','Coca-Cola','Sprite','Skinka'])assert(items.some(item=>item.nome===name+' · 400 ml'));
 });
 
 test('cardápio: valores do servidor são usados no pedido e combos indefinidos não podem ser enviados',()=>{
@@ -60,8 +82,8 @@ test('produtos arquivados somem do catálogo e não podem ser comprados, preserv
    for(const item of foods){assert(item.imagem.startsWith('assets/lanches/'),item.id);assert(item.imagemAlt,item.id);const image=await readFile(new URL('../../frontend/'+item.imagem,import.meta.url));assert(image.length>1000,item.id);}
  });
 
- test('bebidas: todas as 14 opcoes possuem foto local',async()=>{
+ test('bebidas: todas as 22 opcoes possuem foto local',async()=>{
    const store=createStore(':memory:',source);
-   try{const drinks=store.catalog().cardapio.find(group=>group.id==='bebidas').itens;assert.equal(drinks.length,14);for(const item of drinks){assert(item.imagem,item.id);assert(item.imagemAlt,item.id);assert((await readFile(new URL('../../frontend/'+item.imagem,import.meta.url))).length>1000,item.id);}}
+   try{const drinks=store.catalog().cardapio.find(group=>group.id==='bebidas').itens;assert.equal(drinks.length,22);for(const item of drinks){assert(item.imagem,item.id);assert(item.imagemAlt,item.id);assert((await readFile(new URL('../../frontend/'+item.imagem,import.meta.url))).length>1000,item.id);}}
    finally{store.close();}
  });
